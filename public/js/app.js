@@ -9,16 +9,17 @@ $(document).ready(function(){
   	event.preventDefault();
   	var item = $('#item-input').val();
   	
-  	var itemHtml = "<li class=''>" + 
-  								"<div class='radio'>" +
-  								"<label class='radio-inline'>" + 
-  								"<input type='radio' value='' name='' data-id=''></label>"
-  									+ item + 
+  	var itemHtml = "<li class='list-group'>" + 
+  								"<div class='checkbox'>" +
+  								"<label class='checkbox-inline'>" + 
+  								"<input type='checkbox' value='' name='my-checkbox' data-id=''></label>"
+  									+ item +  
   									"<progress max='100' value='50'>" +
-  									"<strong> 50% done.</strong>" +
 										"</progress>" +
-  	 								"<span data-id='" + //data._id 
-  	 								"' class='close delete'>x</span></li>"; 
+										"<div class='remove-item pull-right'>" +
+  	 								"<button data-id='' type='button' class='close'>" +
+  	 								"<i class='icon ion-ios-trash-outline'></button></div></div>"; 
+  	 								
   	if (item !== ''){
 
 			$('#list-items-ul').prepend(itemHtml);
@@ -35,6 +36,17 @@ $(document).ready(function(){
 	$('.dropdown-menu li').on('click', function () {
 		$(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
   	$(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+	});
+
+
+
+
+	//delete items from list
+	$('.icon').on('click', function (event){
+		event.preventDefault();
+		console.log(this);
+		
+
 	});
 	
 
