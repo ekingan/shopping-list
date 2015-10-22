@@ -12,12 +12,34 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
-
-app.get('/', function(req, res) {
-  res.render("index");
+//GET ROUTES
+//for index
+app.get('/', function (req, res) {
+	var items = [
+			{name: 'apples', expired: false}, 
+			{name: 'coffee', expired: false},
+			{name: 'peanut butter', expired: false}
+			];
+  res.render("index", {items: items});
 });
 
+//POST ROUTE - create new list of items
+app.post('/items', function (req, res){
+	var item = req.body.item;
+	items.push(item);
+	res.status(200).json(item);
+});
+
+app.get('/items/:id', function (req, res){
+	var item = item[req.params.id]; 
+	res.render('/', {items: items});
+});
+//DELETE
+//UPDATE
+//SHOW
+
+
 app.listen(3000, function() {
-  console.log("express-heroku-starter is running on port 3000");
+  console.log("shopping list is running on port 3000");
 });
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Express - Heroku Starter Project</title>
+  <title>Smart Shopping List</title>
   <meta charset="utf-8" />
   <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,6 +9,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <!-- Bootswatch Styles -->
+  <link rel="stylesheet" href="https://bootswatch.com/yeti/bootstrap.css">
+  <!-- Iconicons -->
+  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Bootstrap JS -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <!-- Custom -->
@@ -16,26 +20,73 @@
   <script src="/js/app.js"></script>
 </head>
 <body>
-
-  <div id="page-wrapper" class="container">
-    <header class="page-header">
-      <h1>This is the Title</h1>
-    </header>
-    
-    <!-- This is the bs3-form boilerplate: -->
-    <form action="" method="POST" role="form">
-      <legend>Form title</legend>
-    
-      <div class="form-group">
-        <label for="">label</label>
-        <input type="text" class="form-control" id="" placeholder="Input field">
+  <nav class='navbar nav-right'>
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+          SmartList
+        </a>
       </div>
-    
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-
-  </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Sign Up</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Log Out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+   </nav> 
+  <div id="page-wrapper" class="container-fluid">
+    <header class="page-header">
+      <h1>SMART SHOPPING LIST</h1>
+    </header>
+    <!-- Add new item form: -->
+    <div class="row"><!-- first row -->
+      <div class='col-xs-8 col-md-9 col-mid-offset-3'><!-- first column -->
+        <form action="" method="POST" role="form" class='form-inline' id='new-item-form'>
+          <div class="form-group">
+            <input type="text" class="form-control" id="item-input" placeholder="new item" name='item'>
+          </div>
+            <div class="dropdown form-group"><!--  Shelf life drop-down menu -->
+              <button class="btn btn-default dropdown-toggle form-control" type="button" id="expiration-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Shelf Life
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="expiration-menu">
+                <li><a href="#">1 minute</a></li>
+                <li><a href="#">Eat it really soon (3 days)</a></li>
+                <li><a href="#">Eat it kinda soon (5 days)</a></li>
+                <li><a href="#">Definitely eat it this week (7 days)</a></li>
+                <li><a href="#">Eat it in the next two weeks</a></li>
+                <li><a href="#">It will stay fresh all month</a></li>
+                <li><a href="#">This never goes bad!</a></li>
+              </ul>
+            </div><!-- End of shelf life drop down menu -->
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+         </form><!-- end of form -->   
+      </div><!-- end of first column -->   
+    </div> <!-- end of first row --> 
+    <div class="row"> <!--second row-->
+      <div class='col-xs-6 col-xs-offset-2 col-md-8 col-mid-offset-4'><!-- first column -->
+        <hr>
+        <h2> Your list:</h2>
+        <hr>
+        <ul class="list-unstyled" id="list-items-ul">
+        <% items.forEach(function(item) { %>
+        <li class="list-items-li"><% item.name%> </li>
+        <% }); %>
+        <hr>
+        </ul>
+      </div><!--end of firs column-->
+    </div><!--end of second row-->  
+  </div>  <!-- end of container -->
 </body>
 </html>
+
+
 
 
