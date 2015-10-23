@@ -56,7 +56,18 @@ app.get('/items/:id', function (req, res){
 	var item = item[req.params.id]; 
 	res.render('/', {items: items});
 });
+
 //DELETE
+app.delete('/items/:id', function (req, res){
+	console.log(req.params);
+	db.Item.remove({_id: req.params.id}, function (err, item){
+		console.log("item deleted");
+
+		res.json(item);
+	});
+});
+
+
 //UPDATE
 //SHOW
 

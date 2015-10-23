@@ -13,7 +13,7 @@ $(document).ready(function(){
 		console.log('yo the serialized form (item) is: ', item);
 
   	
-  	if (item !== ''){
+  	if ($('#item-input').val() !== ''){
 
 	  	$.ajax({
 	  		url: '/items', 
@@ -26,7 +26,7 @@ $(document).ready(function(){
 			  	console.log(count);
 
 	  			var itemHtml = "<li class='list-group' id='" + count + "'>" + 
-	  								"<div class='checkbox'>" +
+	  								"<div class=''>" +
 	  								"<label class='checkbox-inline'>" + 
 	  								"<input type='checkbox' id='checkbox' value='' name='checkbox' class='checkbox' data-id='" + count + "'></label>"
 	  									+ item.name +  
@@ -34,7 +34,7 @@ $(document).ready(function(){
 											"</progress>" +
 											"<div class='remove-item pull-right'>" +
 	  	 								"<button data-id='" + count + "' type='button' class='close'>" +
-	  	 								"<i class='icon ion-ios-trash-outline'></button></div></div>"; 
+	  	 								"<i class='icon ion-ios-trash-outline'></i></button></div></div>"; 
 	  	 								
 	  	
 
@@ -63,9 +63,22 @@ $(document).ready(function(){
 	//delete items from list
 	$('#list-items-ul').on('click', '.close', function (event){
 		event.preventDefault();
-		console.log(this);
+
 		var id = $(this).attr('data-id');
-		$('#' + id).remove();
+		console.log(id);
+
+			$.ajax({
+			url: '/items/' + id,
+			type: 'DELETE',
+		})
+			.done(function (data){
+				 console.log("deleting ", data);
+				 $('#' + id).remove();
+
+			})
+			.fail(function (data) {
+				console.log("failed to delete ", data);
+			});
 	});
 
 
@@ -82,6 +95,8 @@ $(document).ready(function(){
 		$(this).html("<input id=" + timeLeft + " type='hidden'>");
 
 	});
+
+
 
 
 
