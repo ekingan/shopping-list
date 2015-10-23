@@ -8,39 +8,56 @@ $(document).ready(function(){
 //Event handler for entering new item 
   $('#new-item-form').on('submit', function (event){
   	event.preventDefault();
-  	var item = $('#item-input').val();
-  	count = count + 1;
+// var item = $('#item-input').val();
+		var item = $('#item-input').serialize();
+		console.log('yo the serialized form (item) is: ', item);
+
   	
-  	var itemHtml = "<li class='list-group' id='" + count + "'>" + 
-  								"<div class='checkbox'>" +
-  								"<label class='checkbox-inline'>" + 
-  								"<input type='checkbox' id='checkbox' value='' name='checkbox' class='checkbox' data-id='" + count + "'></label>"
-  									+ item +  
-  									"<progress max='100' value='50'>" +
-										"</progress>" +
-										"<div class='remove-item pull-right'>" +
-  	 								"<button data-id='" + count + "' type='button' class='close'>" +
-  	 								"<i class='icon ion-ios-trash-outline'></button></div></div>"; 
-  	 								
   	if (item !== ''){
 
-			$('#list-items-ul').prepend(itemHtml);
-			$('#new-item-form')[0].reset();
-				console.log("you added " + item);
+	  	$.ajax({
+	  		url: '/items', 
+	  		type: 'POST', 
+	  		data: item
+	  	})
+	  		.done(function (item){
+	  			console.log("you added an new item ", item);
+	  			count = item._id;
+			  	console.log(count);
+
+	  			var itemHtml = "<li class='list-group' id='" + count + "'>" + 
+	  								"<div class='checkbox'>" +
+	  								"<label class='checkbox-inline'>" + 
+	  								"<input type='checkbox' id='checkbox' value='' name='checkbox' class='checkbox' data-id='" + count + "'></label>"
+	  									+ item.name +  
+	  									"<progress max='100' value='50'>" +
+											"</progress>" +
+											"<div class='remove-item pull-right'>" +
+	  	 								"<button data-id='" + count + "' type='button' class='close'>" +
+	  	 								"<i class='icon ion-ios-trash-outline'></button></div></div>"; 
+	  	 								
+	  	
+
+					$('#list-items-ul').prepend(itemHtml);
+					$('#new-item-form')[0].reset();
+					console.log("you added ", item);
+			})
+
+				.fail(function (data){
+ 					console.log("item was not added");
+  		});
 		} else {
-			console.log("your form is blank");
-		}
-	});
+				console.log("your form is blank");
+			}
+		
+		});
 
 
-	//event handler for getting data from the dropdown
-
+	//event handler for changing selection displayed on dropdown
 	$('.dropdown-menu li').on('click', function () {
 		$(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
   	$(this).parents(".dropdown").find('.btn').val($(this).data('value'));
 	});
-
-
 
 
 	//delete items from list
@@ -58,30 +75,24 @@ $(document).ready(function(){
 		$('#' + id).toggleClass('grey');
 	});
 
+	$('.dropdown-menu li').on('click', function (){
+		var timeLeft = $(this).attr('data-value');
+		console.log(timeLeft);
+		$(this).html("<input id=" + timeLeft + " type='hidden'>");
+
+	});
+
+
+
   	//before serialize 
   	//get value of bootstrap dropdown
   	//save value into value of hidden form field
   	// finally serialize the form
-
-
-
-  	
-  	
-  	
-  	// $.ajax({
-  	// 	url: '/items', 
-  	// 	type: 'POST', 
-  	// 	data: item
-  	// })
-  	// 	.done(function (data){
-  	// 		console.log("you added an new item ", data);
-  	
-
-  	// 	})
-  	// 		.fail(function (data){
-  	// 			console.log("item was not added");
-  	// 		});
   		
+  	
+  	
+  	
+  	
   	
 
 

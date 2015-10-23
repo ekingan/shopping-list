@@ -15,19 +15,41 @@ app.use(bodyParser.urlencoded({extended: true}));
 //GET ROUTES
 //for index
 app.get('/', function (req, res) {
-	var items = [
-			{name: 'apples', expired: false}, 
-			{name: 'coffee', expired: false},
-			{name: 'peanut butter', expired: false}
-			];
-  res.render("index", {items: items});
+	db.Item.find({}, function (err, items){
+		if (err){
+			console.log("error getting items from db");
+		}
+		console.log("these are the items, ", items);
+		res.render("index", {items: items});
+		});
+	// var items = [
+	// 		{name: 'apples'},
+	// 		{name: 'coffee'},
+	// 		{name: 'pumpkin'} 
+			
+	// 		];
+  
+});
+
+// TODO: do we need this?  delete?
+app.get('/items', function (req, res) {
+	db.Item.find({}, function (err, item) {
+		if (err) {
+			console.log("error getting items from DB");
+			}
+		res.json(item); 
+	});
 });
 
 //POST ROUTE - create new list of items
 app.post('/items', function (req, res){
-	var item = req.body.item;
-	items.push(item);
-	res.status(200).json(item);
+	console.log(req.body);
+	db.Item.create(req.body, function (err, item){
+		if (err){
+			console.log("failed to create new item");
+		}
+		res.json(item);
+	});
 });
 
 app.get('/items/:id', function (req, res){
