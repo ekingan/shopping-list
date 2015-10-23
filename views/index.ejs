@@ -12,7 +12,7 @@
   <!-- Bootswatch Styles -->
   <link rel="stylesheet" href="https://bootswatch.com/paper/bootstrap.css">
   <!-- Bootstrap switch -->
-  <link href="bootstrap-switch.css" rel="stylesheet">
+  <!-- <link href="bootstrap-switch.css" rel="stylesheet"> -->
   <!-- Iconicons -->
   <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Bootstrap JS -->
@@ -22,6 +22,60 @@
   <script src="/js/app.js"></script>
 </head>
 <body>
+<!-- Login Modal -->
+<div class="modal fade" id='login-modal'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Log In</h4>
+      </div>
+      <div class="modal-body">
+        <form> <!-- Log In Form -->
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" id="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-default">Log In</button>
+      </form> <!-- End Log In Form -->
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- Sign Up Modal -->
+<div class="modal fade" id='signup-modal'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Sign Up</h4>
+      </div>
+      <div class="modal-body">
+      <form> <!-- Sign Up Form -->
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" id="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label for="password1">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label for="password2">Enter Password Again</label>
+          <input type="password" class="form-control" id="password" placeholder="Enter Password Again"> 
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- End of Sign Up Modal -->
+
   <nav class='navbar nav-right'>
     <div class="container-fluid">
       <div class="navbar-header">
@@ -29,15 +83,11 @@
           SmartList
         </a>
       </div>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Sign Up</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Log Out</a></li>
-          </ul>
-        </li>
-      </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a data-toggle='modal' data-target='#signup-modal'>Sign Up</a></li>
+          <li><a data-toggle='modal' data-target='#login-modal'>Log In</a></li>
+          <li><a href="#">Log Out</a></li>
+        </ul>
     </div>
    </nav> 
   <div id="page-wrapper" class="container-fluid">
@@ -46,7 +96,7 @@
     </header>
     <!-- Add new item form: -->
     <div class="row"><!-- first row -->
-      <div class='col-xs-8 col-md-9 col-mid-offset-3'><!-- first column -->
+      <div class='col-xs-12 col-md-10 col-md-offset-2'><!-- first column -->
         <form action="" method="POST" role="form" class='form-inline' id='new-item-form'>
           <div class="form-group">
             <input type="text" class="form-control" id="item-input" placeholder="new item" name='item'>
@@ -59,10 +109,10 @@
               <ul class="dropdown-menu" aria-labelledby="expiration-menu">
                 <li data-value='1 min'>1 minute</li>
                 <li data-value='4 days'>Eat it really soon!</li>
-                <li data-value='7 days'>Definitely eat it this week (7 days)</li>
-                <li data-value='14 days'>Eat it in the next two weeks</li>
+                <li data-value='7 days'>Definitely eat it this week</li>
+                <li data-value='14 days'>Eat it within two weeks</li>
                 <li data-value='30 days'>It will stay fresh all month</li>
-                <li data-value='none'>This will last forever!</li>
+                <li data-value='none'>This lasts forever!</li>
               </ul>
             </div><!-- End of shelf life drop down menu -->
             <div class="form-group">

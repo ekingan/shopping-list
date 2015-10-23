@@ -1,5 +1,6 @@
 // CLIENT-SIDE JAVASCRIPT
 // On page load
+var count = 0;
 $(document).ready(function(){
 	console.log('Hey, Earth!');
 
@@ -8,16 +9,17 @@ $(document).ready(function(){
   $('#new-item-form').on('submit', function (event){
   	event.preventDefault();
   	var item = $('#item-input').val();
+  	count = count + 1;
   	
-  	var itemHtml = "<li class='list-group'>" + 
+  	var itemHtml = "<li class='list-group' id='" + count + "'>" + 
   								"<div class='checkbox'>" +
   								"<label class='checkbox-inline'>" + 
-  								"<input type='checkbox' value='' name='my-checkbox' data-id=''></label>"
+  								"<input type='checkbox' id='checkbox' value='' name='checkbox' class='checkbox' data-id='" + count + "'></label>"
   									+ item +  
   									"<progress max='100' value='50'>" +
 										"</progress>" +
 										"<div class='remove-item pull-right'>" +
-  	 								"<button data-id='' type='button' class='close'>" +
+  	 								"<button data-id='" + count + "' type='button' class='close'>" +
   	 								"<i class='icon ion-ios-trash-outline'></button></div></div>"; 
   	 								
   	if (item !== ''){
@@ -42,13 +44,19 @@ $(document).ready(function(){
 
 
 	//delete items from list
-	$('.icon').on('click', function (event){
+	$('#list-items-ul').on('click', '.close', function (event){
 		event.preventDefault();
 		console.log(this);
-		
-
+		var id = $(this).attr('data-id');
+		$('#' + id).remove();
 	});
-	
+
+
+	//Greys out check items
+	$('#list-items-ul').on('click', '.checkbox', function (){
+		var id = $(this).attr('data-id');
+		$('#' + id).toggleClass('grey');
+	});
 
   	//before serialize 
   	//get value of bootstrap dropdown
