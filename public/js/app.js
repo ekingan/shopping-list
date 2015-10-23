@@ -72,6 +72,7 @@ $(document).ready(function(){
 	//Greys out check items
 	$('#list-items-ul').on('click', '.checkbox', function (){
 		var id = $(this).attr('data-id');
+		console.log("this is the data id for list items ", id);
 		$('#' + id).toggleClass('grey');
 	});
 

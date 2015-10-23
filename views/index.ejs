@@ -130,14 +130,14 @@
         <hr>
         <ul class="list-unstyled" id="list-items-ul">
           <% items.forEach(function(item) { %>
-          <li class='list-group' id='<% item._id %>'>
-           <div class='checkbox'>
+          <li class='list-group' id='<%= item._id %>'>
+           <div class=''>
             <label class='checkbox-inline'>
             <input type='checkbox' id='checkbox' value='' name='checkbox' class='checkbox' data-id='<%=item._id%>'>
             </label> <%=item.name%>
              <progress max='100' value='50'></progress>
               <div class='remove-item pull-right'>
-               <button data-id='<%item._id%>' type='button' class='close'>
+               <button data-id='<%=item._id%>' type='button' class='close'>
                <i class='icon ion-ios-trash-outline'></i>
                </button>
               </div>
