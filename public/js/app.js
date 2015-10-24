@@ -9,7 +9,7 @@ $(document).ready(function(){
   $('#new-item-form').on('submit', function (event){
   	event.preventDefault();
 // var item = $('#item-input').val();
-		var item = $('#item-input').serialize();
+		var item = $('#new-item-form').serialize();
 		console.log('yo the serialized form (item) is: ', item);
 
   	
@@ -81,30 +81,47 @@ $(document).ready(function(){
 			});
 	});
 
-
-	//Greys out check items
+//Event handler for checkbox
 	$('#list-items-ul').on('click', '.checkbox', function (){
 		var id = $(this).attr('data-id');
-		console.log("this is the data id for list items ", id);
+		//Greys out check items
 		$('#' + id).toggleClass('grey');
+		//adds time stamp
+		$.now();
+		$.get('/items/' + id + '/purchase', function (data){
+			console.log(data);
+		});
 	});
 
-	$('.dropdown-menu li').on('click', function (){
-		var timeLeft = $(this).attr('data-value');
-		console.log(timeLeft);
-		$(this).html("<input id=" + timeLeft + " type='hidden'>");
 
-	});
+//adds time to expiration from the dropdown menu 
+	// $('option').on('click', function (){
+	// 	var timeUntilExpiration = $(this).data('id');
+	// 	console.log(timeUntilExpiration);
+	// 	console.log(this);
+		
+	// });
+
+	//Progress Bar functionality
+	// var progressBar = function (dateStamp, timeUntilExpiration){
+	// 	var target = dateStamp + timeUntilExpiration;
+	// 	timeUntilExpiration / 100
+
+
+	// };
+	// $('progress').
 
 
 
-
+//need to only start tracking date on odd clicks.
+//otherwise keep it at 100%
 
   	//before serialize 
   	//get value of bootstrap dropdown
   	//save value into value of hidden form field
   	// finally serialize the form
-  		
+  	//put route
+
   	
   	
   	
