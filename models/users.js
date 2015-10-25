@@ -16,10 +16,25 @@ bcrypt.genSalt(function (err, salt){
 
 		user.create({
 			email: email,
+			// items: [{type: Schema.Types.ObjectId, ref: "Item"}]
 			passwordDigest: hash
 		}, callback);
 	});
 });
+};
+
+userSchema.statics.authenticate = function (email, password, callback) {
+	this.findOne({email: email}, function (err, user) {
+		if (!user) {
+			console.log('No user with email: ' + email, null);
+		} else if (user.checkPassword(password)) {
+			callback (null, user);
+		}
+	});
+};
+
+userSchema.methods.checkPassword = function (password) {
+	return bcrypt.compareSync(password, this.passwordDigest);
 };
 
 

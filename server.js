@@ -5,12 +5,21 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+var session = require('express-session');
 var db = require("./models/index");
 
+
+//MIDDLEWARE
 app.set("view engine", "ejs");
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(session({
+	saveUninitialized: true,
+	resave: true, 
+	secret: 'SuperSecretCookie',
+	cookie: {maxAge: 600000}
+}));
 
 //GET ROUTES
 //for index
@@ -50,7 +59,20 @@ app.post('/items', function (req, res){
 app.post('/users', function (req, res){
 	var user = req.body;
 	db.User.createSecure(user.email, user.password, function (err, user){
+		req.session.userID = user._id;
 		res.json({user: user, msg: "user created"});
+	});
+});
+
+//check user is correct
+app.post('/login', function (req, res){
+	var user = req.body;
+	db.User.authenticate(user.email, user.password, function (err, user){
+		if (err) {
+			console.log("there was an err " , err);
+		} 
+		req.session.user = user;
+		res.json(user);
 	});
 });
 
@@ -72,12 +94,22 @@ app.get('/items/:id/purchase', function (req, res){
 });
 
 //get signup
-app.get('/signup', function (req, res ) {
+app.get('/signup', function (req, res) {
 	res.render('signup');
 });
 //get login
-app.get('/login', function (req, res ) {
+app.get('/login', function (req, res) {
 	res.render('login');
+});
+//get current user
+app.get('/current-user', function (req, res) {
+	res.json({ user: req.session.user});
+});
+//logout user
+app.get('/logout', function (req, res){
+	req.session.userId = null;
+	req.session.user = null;
+	res.json({ msg: 'User logged out successfully'});
 });
 
 
