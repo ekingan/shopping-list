@@ -84,15 +84,18 @@ app.get('/items/:id/purchase', function (req, res){
 		if (err){
 			console.log("error adding purchase date");
 		} else {
-			item.purchasedAt = new Date();
-			console.log(item.purchasedAt);
-			item.expiresAt = item.purchasedAt.setMilliseconds(item.purchasedAt.getMilliseconds() + item.shelfLife);
+			
+			item.purchasedAt = new Date().getTime();
+			
+			item.expiresAt = (item.purchasedAt + item.shelfLife);
+		
 			item.save();
 			res.json(item);
+			
 		}
 	});
 });
-
+// item.purchasedAt.getMilliseconds() + item.shelfLife
 //get signup
 app.get('/signup', function (req, res) {
 	res.render('signup');

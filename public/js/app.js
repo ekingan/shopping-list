@@ -24,13 +24,13 @@ $(document).ready(function(){
 	  			console.log("you added an new item ", item);
 	  			count = item._id;
 			  	console.log(count);
-
+			  	
 	  			var itemHtml = "<li class='list-group' id='" + count + "'>" + 
 	  								"<div class=''>" +
 	  								"<label class='checkbox-inline'>" + 
 	  								"<input type='checkbox' id='checkbox' value='' name='checkbox' class='checkbox' data-id='" + count + "'></label>"
 	  									+ item.name +  
-	  									"<progress max='100' value='50'>" +
+	  									"<progress max='100' value='100'>" +
 											"</progress>" +
 											"<div class='remove-item pull-right'>" +
 	  	 								"<button data-id='" + count + "' type='button' class='close'>" +
@@ -39,6 +39,7 @@ $(document).ready(function(){
 	  	
 
 					$('#list-items-ul').prepend(itemHtml);
+					progressBar(item);
 					$('#new-item-form')[0].reset();
 					console.log("you added ", item);
 			})
@@ -89,7 +90,7 @@ $(document).ready(function(){
 		//adds time stamp
 		$.now();
 		$.get('/items/' + id + '/purchase', function (data){
-			console.log(data);
+		
 		});
 	});
 
@@ -103,34 +104,17 @@ $(document).ready(function(){
 	// });
 
 	//Progress Bar functionality
-	// var progressBar = function (dateStamp, timeUntilExpiration){
-	// 	var target = dateStamp + timeUntilExpiration;
-	// 	timeUntilExpiration / 100
+	var progressBar = function (item){
+		var d = new Date();
+		var timeNow = d.getTime();
+		console.log(timeNow);
+		var progress = (100 - (item.expiresAt - timeNow)/item.shelfLife);
+		$('progress').html('value', progress);
 
-
-	// };
+ };
 	// $('progress').
 
 
 
-//need to only start tracking date on odd clicks.
-//otherwise keep it at 100%
-
-  	//before serialize 
-  	//get value of bootstrap dropdown
-  	//save value into value of hidden form field
-  	// finally serialize the form
-  	//put route
-
-  	
-  	
-  	
-  	
-  	
-
-
-
-
-  
 
 });

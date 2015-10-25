@@ -81,7 +81,7 @@
   <nav class='navbar nav-right'>
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="recipe.ejs">
+        <a class="navbar-brand" href="#" id='recipe-search'>
           Recipe Search
         </a>
       </div>
@@ -96,60 +96,21 @@
     <header class="page-header">
       <h1>SMART SHOPPING LIST</h1>
     </header>
-    <!-- Add new item form: -->
-    <div class="row"><!-- first row -->
-      <div class='col-xs-12 col-md-10 col-md-offset-2'><!-- first column -->
-        <form action="" method="POST" role="form" class='form-inline' id='new-item-form'>
-        <form type='hidden' value='none' id='hidden-form'>
-          <div class="form-group">
-            <input type="text" class="form-control" id="item-input" placeholder="new item" name='name'>
-          </div>
-            <div class="dropdown form-group"><!--  Shelf life drop-down menu -->
-              <select class='form-control' name="shelfLife">
-                <option value="60000">  Shelf Life</option>
-                <option value="345600000">Eat it soon!</option>
-                <option value="604800000">Eat it this week</option>
-                <option value="1209600000">Eat it within 2 weeks</option>
-                <option value="2592000000">It will stay fresh all month</option>
-                <option value="null">This lasts forever!</option>
-              </select>
-            </div><!-- End of shelf life drop down menu -->
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary">Add</button>
-            </div>
-         </form>
-         </form><!-- end of form -->   
-      </div><!-- end of first column -->   
-    </div> <!-- end of first row --> 
-    <div class="row"> <!--second row-->
-      <div class='col-xs-6 col-xs-offset-2 col-md-8 col-mid-offset-4'><!-- first column -->
+    
+    <div class="row"> <!--first row-->
+      <div class='col-xs-12 col-md-10 col-mid-offset-1'><!-- first column -->
         <hr>
-        <h2> Your list:</h2>
+        <h2> Your Recipes:</h2>
         <hr>
-        <ul class="list-unstyled" id="list-items-ul">
-          <% items.reverse().forEach(function(item) { var d = new Date();
-    var timeNow = d.getTime(); %>
-          <li class='list-group' id='<%= item._id %>'>
-           <div class=''>
-            <label class='checkbox-inline'>
-            <input type='checkbox' id='checkbox' value='' name='checkbox' class='checkbox' data-id='<%=item._id%>'>
-            </label> <%=item.name%>
-             <progress max='100' value='<%=(100 - (item.expiresAt - timeNow)/item.shelfLife)%>'></progress>
-              <div class='remove-item pull-right'>
-               <button data-id='<%=item._id%>' type='button' class='close'>
-               <i class='icon ion-ios-trash-outline'></i>
-               </button>
-              </div>
-            </div>
-          </li>
-          <% }); %>
-          <hr>
-        </ul>
-      </div><!--end of firs column-->
-    </div><!--end of second row-->  
+        <div id="results">
+        
+          
+      </div><!--end of results-->
+    </div><!--end of first row-->  
   </div>  <!-- end of container -->
 </body>
 </html>
+
 
 
 

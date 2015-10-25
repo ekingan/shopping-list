@@ -3,8 +3,8 @@ var mongoose = require('mongoose');
 var itemSchema = mongoose.Schema({
 		name: String,
 		shelfLife: Number,
-		purchasedAt: Date,
-		expiresAt: Date
+		purchasedAt: Number,
+		expiresAt: Number
 		// updated: { type: Date, default: Date.now },
 });
 
