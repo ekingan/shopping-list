@@ -43,7 +43,7 @@ app.get('/', function (req, res) {
 			res.render("index", {items: items});
 		});
 	} else {
-		res.render('index', {items: ['strawberries', 'bacon', 'lettuce', 'beans', 'kale']}); //put fake items
+		res.render('index', {items: ['strawberries']}); //put fake items
 
 	}
 });
