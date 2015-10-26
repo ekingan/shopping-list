@@ -8,7 +8,7 @@
   <!-- jQuery -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <!-- Bootswatch Styles -->
   <link rel="stylesheet" href="https://bootswatch.com/paper/bootstrap.css">
   <!-- Bootstrap switch -->
@@ -16,23 +16,28 @@
   <!-- Iconicons -->
   <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Bootstrap JS -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <!-- Toastr -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
   <!-- Custom -->
   <link rel="stylesheet" type="text/css" href="/css/main.css">
   <script src="/js/app.js"></script>
   <script src="/js/auth.js"></script>
   <script src="/js/recipe.js"></script>
+  
 </head>
 <body>
+
 <!-- Login Modal -->
-<div class="modal fade not-logged-in" id='login-modal'>
+<div class="modal fade" id='login-modal'>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Log In</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" >
         <form id="login-form" > <!-- Log In Form -->
         <div class="form-group">
           <label for="email">Email address</label>
@@ -42,12 +47,13 @@
           <label for="password">Password</label>
           <input name='password' type="password" class="form-control" id="password" placeholder="Password">
         </div>
-        <button type="submit" class="btn btn-default login-btn">Log In</button>
+        <button type="submit" class="btn btn-default login-btn" >Log In</button>
       </form> <!-- End Log In Form -->
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
 <!-- Sign Up Modal -->
 <div class="modal fade not-logged-in" id='signup-modal'>
   <div class="modal-dialog">
@@ -86,6 +92,7 @@
         </a>
       </div>
         <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" id='guest' class='not-logged-in'>Guest</a></li>
           <li><a data-toggle='modal' data-target='#signup-modal' class='not-logged-in'>Sign Up</a></li>
           <li><a data-toggle='modal' data-target='#login-modal' class='not-logged-in'>Log In</a></li>
           <li><a href="#" id='logout'>Log Out</a></li>
@@ -102,11 +109,11 @@
         <form action="" method="POST" role="form" class='form-inline' id='new-item-form'>
         <form type='hidden' value='none' id='hidden-form'>
           <div class="form-group">
-            <input type="text" class="form-control" id="item-input" placeholder="new item" name='name'>
+            <input type="text" class="form-control" id="item-input" placeholder="New Item" name='name'>
           </div>
             <div class="dropdown form-group"><!--  Shelf life drop-down menu -->
               <select class='form-control' name="shelfLife">
-                <option value="600000">  Shelf Life</option>
+                <option value="60000">  Shelf Life</option>
                 <option value="345600000">Eat it soon!</option>
                 <option value="604800000">Eat it this week</option>
                 <option value="1209600000">Eat it within 2 weeks</option>
@@ -128,11 +135,14 @@
         <hr>
         <ul class="list-unstyled" id="list-items-ul">
           <% items.reverse().forEach(function(item) { var d = new Date();
-    var timeNow = d.getTime(); %>
-          <li class='list-group' id='<%= item._id %>'>
+          var timeNow = d.getTime(); %>
+          <li class='list-group <% if(timeNow < item.expiresAt) { var checkedClass = 'grey' }; %> 
+          <%= checkedClass %>' id='<%= item._id %>'>
            <div class=''>
             <label class='checkbox-inline'>
-            <input type='checkbox' id='checkbox' value='' name='checkbox' class='checkbox' data-id='<%=item._id%>'>
+            <input type='checkbox' id='checkbox' name='checkbox' class='checkbox' data-id='<%=item._id%>' 
+            <% if(timeNow < item.expiresAt) { var text = 'checked' }; %> 
+            <%= text %> >
             </label> <%=item.name%>
              <progress class='' max='100' value='<%=(100*((item.expiresAt - timeNow) / item.shelfLife))%>'> </progress>
               <div class='remove-item pull-right'>

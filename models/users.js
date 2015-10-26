@@ -16,7 +16,6 @@ bcrypt.genSalt(function (err, salt){
 
 		user.create({
 			email: email,
-			items: [itemSchema],
 			passwordDigest: hash
 		}, callback);
 	});
@@ -27,6 +26,7 @@ userSchema.statics.authenticate = function (email, password, callback) {
 	this.findOne({email: email}, function (err, user) {
 		if (!user) {
 			console.log('No user with email: ' + email, null);
+			callback("No user found", null);
 		} else if (user.checkPassword(password)) {
 			callback (null, user);
 		}

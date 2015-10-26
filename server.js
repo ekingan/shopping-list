@@ -11,11 +11,12 @@ var request = require('request');
 var dotenv = require('dotenv').load();
 var FOOD_API_KEY = process.env.FOOD_API_KEY;
 var foods;
+var cookieParser = require('cookie-parser');
 
 
 //MIDDLEWARE
 app.set("view engine", "ejs");
-
+app.use(cookieParser());
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(session({
@@ -28,13 +29,18 @@ app.use(session({
 //GET ROUTES
 //for index
 app.get('/', function (req, res) {
-	db.Item.find({}, function (err, items){
-		if (err){
-			console.log("error getting items from db");
-		}
-		console.log("these are the items, ", items);
-		res.render("index", {items: items});
+	if(req.session.user ) {
+		db.Item.find({user: req.session.user._id}, function (err, items){ // user: req.session.user._id
+			if (err){
+				console.log("error getting items from db");
+			}
+			console.log("these are the items, ", items);
+			res.render("index", {items: items});
 		});
+	} else {
+		res.render('index', {items: ['strawberries', 'bacon', 'lettuce', 'beans', 'kale']}); //put fake items
+
+	}
 });
 //ARE THESE RIGHT?
 //Get Route for recipes
@@ -55,13 +61,27 @@ app.get('/recipe', function (req, res) {
 //POST ROUTE 
 //create new list of items
 app.post('/items', function (req, res){
+	var item = req.body;
 	console.log(req.body);
-	db.Item.create(req.body, function (err, item){
+	console.log(req.session.user._id);
+	item.user = req.session.user._id;
+
+	db.Item.create(item, function (err, item){
 		if (err){
 			console.log("failed to create new item");
 		}
+		console.log(item);
 		res.json(item);
 	});
+
+});
+
+//create guest
+app.post('/guest', function (req, res){
+	var guest;
+	req.session.user = guest;
+		res.json({user: guest, msg: "user created"});
+
 });
 
 //create new user
@@ -79,9 +99,11 @@ app.post('/login', function (req, res){
 	db.User.authenticate(user.email, user.password, function (err, user){
 		if (err) {
 			console.log("there was an err " , err);
-		} 
-		req.session.user = user;
-		res.json(user);
+			res.json({err: err});
+		} else {
+			req.session.user = user;
+			res.json(user);
+		}
 	});
 });
 
@@ -104,7 +126,10 @@ app.get('/items/:id/purchase', function (req, res){
 		}
 	});
 });
-
+//get guest
+app.get('/guest', function (req, res){
+	res.render('guest');
+});
 //get signup
 app.get('/signup', function (req, res) {
 	res.render('signup');
@@ -119,7 +144,6 @@ app.get('/current-user', function (req, res) {
 });
 //logout user
 app.get('/logout', function (req, res){
-	req.session.userId = null;
 	req.session.user = null;
 	res.json({ msg: 'User logged out successfully'});
 });
@@ -139,62 +163,67 @@ app.delete('/items/:id', function (req, res){
 
 //Routed to work with embeded data
 // create todo embedded in list
-app.post('/users/:userId/items', function (req, res) {
-  // set the value of the user id
-  var userId = req.params.userId;
+// app.post('/users/:userId/items', function (req, res) {
+//   // set the value of the user id
+//   var userId = req.params.userId;
 
-  // store new item in memory with data from request body
-  var newItem = new Item(req.body.item);
+//   // store new item in memory with data from request body
+//   var newItem = new Item(req.body.item);
 
-  // find user in db by id and add new item
-  User.findOne({_id: userId}, function (err, foundUser) {
-    foundUser.items.push(newItem);
-    foundUser.save(function (err, savedUser) {
-      res.json(newItem);
-    });
-  });
-});
+//   // find user in db by id and add new item
+//   User.findOne({_id: userId}, function (err, foundUser) {
+//     foundUser.items.push(newItem);
+//     foundUser.save(function (err, savedUser) {
+//       res.json(newItem);
+//     });
+//   });
+// });
 
-// update item embedded in list
-app.put('/user/:userId/items/:id', function (req, res) {
-  // set the value of the user and item ids
-  var userId = req.params.userId;
-  var itemId = req.params.id;
+// // update item embedded in list
+// app.put('/user/:userId/items/:id', function (req, res) {
+//   // set the value of the user and item ids
+//   var userId = req.params.userId;
+//   var itemId = req.params.id;
 
-  // find user in db by id
-  User.findOne({_id: userId}, function (err, foundUser) {
-    // find item embedded in list
-    var foundItem = foundUser.items.id(itemId);
-    // update item name and completed with data from request body
-    foundItem.name = req.body.item.name;
+//   // find user in db by id
+//   User.findOne({_id: userId}, function (err, foundUser) {
+//     // find item embedded in list
+//     var foundItem = foundUser.items.id(itemId);
+//     // update item name and completed with data from request body
+//     foundItem.name = req.body.item.name;
     
-    foundUser.save(function (err, savedUser) {
-      res.json(foundItem);
-      //need to include purchasedAt, expiresAt, shelfLife?
-    });
-  });
-});
-// delete item embedded in list
-app.delete('/user/:userId/items/:id', function (req, res) {
-  // set the value of the list and todo ids
-  var userId = req.params.userId;
-  var itemId = req.params.id;
+//     foundUser.save(function (err, savedUser) {
+//       res.json(foundItem);
+//       //need to include purchasedAt, expiresAt, shelfLife?
+//     });
+//   });
+// });
+// // delete item embedded in list
+// app.delete('/user/:userId/items/:id', function (req, res) {
+//   // set the value of the list and todo ids
+//   var userId = req.params.userId;
+//   var itemId = req.params.id;
 
-  // find user in db by id
-  User.findOne({_id: userId}, function (err, foundUser) {
-    // find item embedded in user
-    var foundItem = foundUser.items.id(itemId);
-    // remove item
-    foundItem.remove();
-    foundUser.save(function (err, savedUser) {
-      res.json(foundItem);
-    });
-  });
-});
+//   // find user in db by id
+//   User.findOne({_id: userId}, function (err, foundUser) {
+//     // find item embedded in user
+//     var foundItem = foundUser.items.id(itemId);
+//     // remove item
+//     foundItem.remove();
+//     foundUser.save(function (err, savedUser) {
+//       res.json(foundItem);
+//     });
+//   });
+// });
 
+// app.get('/', function (req, res) {
+// 	console.log(req.cookies.message);
+// 	res.cookie("message", "hello again");
+// 	res.send("hello cookie");
+// });
 
-//UPDATE
-//SHOW
+// //UPDATE
+// //SHOW
 
 
 app.listen(3000, function() {

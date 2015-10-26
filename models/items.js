@@ -4,8 +4,8 @@ var itemSchema = mongoose.Schema({
 		name: String,
 		shelfLife: Number,
 		purchasedAt: Number,
-		expiresAt: Number
-		// updated: { type: Date, default: Date.now },
+		expiresAt: Number,
+		user: {type: String, ref: 'User'}
 });
 
 var Item = mongoose.model('Item', itemSchema);

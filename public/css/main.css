@@ -13,8 +13,10 @@
 }
 
 progress {
-		margin-left: 150px;
-		position: relative;
+	margin-left: 80px;
+	 position: absolute;
+    left:50%;
+    margin-left:-20px;
 
 }
 .grey {
