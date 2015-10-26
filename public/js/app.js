@@ -84,6 +84,7 @@ $(document).ready(function(){
 		var id = $(this).attr('data-id');
 		//Greys out check items
 		$('#' + id).toggleClass('grey');
+		$('progress').attr('value', 100);
 		//adds time stamp
 		$.now();
 		$.get('/items/' + id + '/purchase', function (data){
@@ -99,14 +100,14 @@ $(document).ready(function(){
 	// 	$('#' + id).toggleClass('grey');
 	
 		// FIXME: what is this for? do we need it?
-		var progressBar = function (item){
-			console.log('in the progressBar function');
-			var d = new Date();
-			var timeNow = d.getTime();
-			console.log(timeNow);
-			var progress = 100 * ((item.expiresAt - timeNow)/item.shelfLife);
-			$('progress').attr('value', progress);
-		};
+		// var progressBar = function (item){
+		// 	console.log('in the progressBar function');
+		// 	var d = new Date();
+		// 	var timeNow = d.getTime();
+		// 	console.log(timeNow);
+		// 	var progress = 100 * ((item.expiresAt - timeNow)/item.shelfLife);
+		// 	$('progress').attr('value', progress);
+		// };
 	
 
 	// })

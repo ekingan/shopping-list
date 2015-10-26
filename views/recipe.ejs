@@ -14,7 +14,7 @@
   <!-- Bootstrap switch -->
   <!-- <link href="bootstrap-switch.css" rel="stylesheet"> -->
   <!-- Iconicons -->
-  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Bootstrap JS -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <!-- Toastr -->
@@ -98,14 +98,44 @@
         </a>
       </div>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" id='guest' class='not-logged-in'>Guest</a></li>
+          <!-- <li><a href="#" id='guest' class='not-logged-in'>Guest</a></li> -->
           <li><a data-toggle='modal' data-target='#signup-modal' class='not-logged-in'>Sign Up</a></li>
           <li><a data-toggle='modal' data-target='#login-modal' class='not-logged-in'>Log In</a></li>
           <li><a href="#" id='logout'>Log Out</a></li>
         </ul>
     </div>
-   </nav> 
+   </nav>
+
   <div id="page-wrapper" class="container-fluid">
-    <header class="page-header">
-      <h1>gather-it.</h1>
-    </header>
+    <div class='row'>
+      <div class='col-md-10 col-md-offset-1'>
+        <header class="page-header">
+          <h1>gather-it.</h1>
+        </header>
+      </div>
+     </div> 
+    <div class="row">
+      <% for(var i=0; i<12; i++) { %>
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <a href="<%=foods[i].source_url%>" target="_blank"><img src="<%=foods[i].image_url%>"></a>
+            <div class="caption">
+              <h3><%=foods[i].title%></h3>
+              
+            </div>
+          </div>
+        </div>
+      <% } %>
+            <!-- code here -->
+    </div>
+
+     <div class="row"><!-- first row -->
+      <div class='col-xs-12 col-md-11 col-md-offset-1'><!-- first column -->
+        
+      <!-- Stuff -->
+
+      </div><!--end of firs column-->
+    </div><!--end of second row-->  
+
+
+

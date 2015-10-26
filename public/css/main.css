@@ -46,8 +46,9 @@ h2 {
 	height: 350px;
 	max-width: 800px;
 	background-image: url("bag-of-food.jpg");
- 	background-size: cover;
- 	/*background-position: center; */
-
+ 	/*background-size: cover;*/
+ 	/*text-align: center;
+ 	background-position: center
+*/
 
 }
