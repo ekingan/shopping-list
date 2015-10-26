@@ -25,6 +25,11 @@ app.use(session({
 	secret: 'SuperSecretCookie',
 	cookie: {maxAge: 600000}
 }));
+mongoose.connect(
+  process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  'mongodb://localhost/shopping-list' // plug in the db name you've been using
+);
 
 //GET ROUTES
 //for index
@@ -226,7 +231,7 @@ app.delete('/items/:id', function (req, res){
 // //SHOW
 
 
-app.listen(3000, function() {
+app.listen(process.env.PORT || 3000, function() {
   console.log("shopping list is running on port 3000");
 });
 

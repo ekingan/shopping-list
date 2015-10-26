@@ -35,4 +35,7 @@
   },
   "homepage": "https://github.com/sf-wdi-22-23/express_heroku_starter#readme",
   "author": "Emily Kingan"
+},
+"scripts": {
+  "start": "node server.js"
 }
