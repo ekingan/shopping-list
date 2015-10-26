@@ -7,7 +7,8 @@ $(document).ready(function (){
 				$('.not-logged-in').hide();
 			} else{
 				console.log("that user does not exist!");
-				
+
+
 			}
 		});
 	}
@@ -32,7 +33,7 @@ $(document).ready(function (){
 		var user = $(this).serialize();
 
 		$.post('/login', user, function (data){
-			checkAuth(data);
+			checkAuth();
 
 		});
 	});
@@ -43,7 +44,9 @@ $(document).ready(function (){
 		$.get('/logout', function (data){
 			console.log(data.msg);
 			$('.not-logged-in').show();
+			$()
 			window.location.reload();
+
 			
 
 		});

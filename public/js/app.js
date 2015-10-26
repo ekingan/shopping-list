@@ -10,7 +10,6 @@ $(document).ready(function(){
   	event.preventDefault();
 // var item = $('#item-input').val();
 		var item = $('#new-item-form').serialize();
-		console.log('yo the serialized form (item) is: ', item);
 
   	
   	if ($('#item-input').val() !== ''){
@@ -21,9 +20,7 @@ $(document).ready(function(){
 	  		data: item
 	  	})
 	  		.done(function (item){
-	  			console.log("you added an new item ", item);
 	  			count = item._id;
-			  	console.log(count);
 			  	
 	  			var itemHtml = "<li class='list-group' id='" + count + "'>" + 
 	  								"<div class=''>" +
@@ -39,9 +36,8 @@ $(document).ready(function(){
 	  	
 
 					$('#list-items-ul').prepend(itemHtml);
-					progressBar(item);
+					
 					$('#new-item-form')[0].reset();
-					console.log("you added ", item);
 			})
 
 				.fail(function (data){
@@ -86,35 +82,37 @@ $(document).ready(function(){
 	$('#list-items-ul').on('click', '.checkbox', function (){
 		var id = $(this).attr('data-id');
 		//Greys out check items
-		$('#' + id).toggleClass('grey');
+	$('#' + id).toggleClass('grey');
 		//adds time stamp
 		$.now();
 		$.get('/items/' + id + '/purchase', function (data){
 		
-		});
-	});
-
-
-//adds time to expiration from the dropdown menu 
-	// $('option').on('click', function (){
-	// 	var timeUntilExpiration = $(this).data('id');
-	// 	console.log(timeUntilExpiration);
-	// 	console.log(this);
-		
+	// 	});
 	// });
-
-	//Progress Bar functionality
-	var progressBar = function (item){
+	// 	$.ajax({
+	// 		url: '/items/' + id + '/purchase', 
+	// 		type: 'POST'
+	// 		// data: item._id.purchase
+	// 	})
+	// 		.done( function (data) { 
+	// 	$('#' + id).toggleClass('grey');
+		var progressBar = function (item){
 		var d = new Date();
 		var timeNow = d.getTime();
 		console.log(timeNow);
-		var progress = (100 - (item.expiresAt - timeNow)/item.shelfLife);
-		$('progress').html('value', progress);
+		var progress = 100 * ((item.expiresAt - timeNow)/item.shelfLife);
+		$('progress').attr('value', progress);
+		};
+	// })
+	// 		.fail( function (data) {
+	// 			console.log('the data was: ' , data);
 
- };
-	// $('progress').
-
-
-
+		});
+	});		
 
 });
+
+
+
+
+

@@ -16,7 +16,7 @@ bcrypt.genSalt(function (err, salt){
 
 		user.create({
 			email: email,
-			// items: [{type: Schema.Types.ObjectId, ref: "Item"}]
+			items: [itemSchema],
 			passwordDigest: hash
 		}, callback);
 	});
