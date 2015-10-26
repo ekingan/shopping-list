@@ -49,7 +49,7 @@ $('#guest').click(function (event) {
 			
 			if (data.err) {	
 				console.log(data.err);
-				alert("no log in by that name");
+				$('.collapse').show();
 				$('#login-form')[0].reset();
 				 
 				// $('#toast').text(data.err).addClass('alert-danger').show();

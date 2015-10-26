@@ -25,11 +25,7 @@ app.use(session({
 	secret: 'SuperSecretCookie',
 	cookie: {maxAge: 600000}
 }));
-mongoose.connect(
-  process.env.MONGOLAB_URI ||
-  process.env.MONGOHQ_URL ||
-  'mongodb://localhost/shopping-list' // plug in the db name you've been using
-);
+
 
 //GET ROUTES
 //for index
@@ -43,7 +39,7 @@ app.get('/', function (req, res) {
 			res.render("index", {items: items});
 		});
 	} else {
-		res.render('index', {items: ['strawberries']}); //put fake items
+		res.render('index', {items: [{name: 'strawberries'}, {name: 'peaches'}, {name: 'bacon'}]}); //put fake items
 
 	}
 });
