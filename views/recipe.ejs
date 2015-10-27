@@ -115,12 +115,12 @@
       </div>
      </div> 
     <div class="row">
-      <% for(var i=0; i<foods.length; i++) { %>
-        <div class="col-sm-6 col-md-3">
+      <% for(var i=0; i<recipes.length; i++) { %>
+        <div class="col-sm-10 col-md-8 col-md-offset-3">
           <div class="thumbnail">
-            <a href="<%=foods[i].source_url%>" target="_blank"><img src="<%=foods[i].image_url%>"></a>
+            <a href="<%=recipes[i].source_url%>" target="_blank"><img src="<%=recipes[i].image_url%>"></a>
             <div class="caption">
-              <h5><%=foods[i].title%></h5>
+              <h5><%=recipes[i].title%></h5>
               
             </div>
           </div>

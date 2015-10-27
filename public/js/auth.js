@@ -17,6 +17,7 @@ function checkAuth() {
 
 
 $(document).ready(function (){
+	$('#email').focus();
 //checks if user is logged in
 	checkAuth();
 	//Sign in as guest
@@ -30,6 +31,7 @@ $('#guest').click(function (event) {
 //gets new user on signup
 	$('#signup-form').submit(function (event){
 			event.preventDefault();
+			
 			var user = $(this).serialize();
 
 			$.post('/users', user, function (data){
@@ -43,7 +45,6 @@ $('#guest').click(function (event) {
 	//log in form
 	$('#login-form').submit(function (event) {
 		event.preventDefault();
-		$(this).focus();
 		var user = $(this).serialize();
 
 		$.post('/login', user, function (data) {
@@ -52,7 +53,7 @@ $('#guest').click(function (event) {
 				console.log(data.err);
 				$('.collapse').show();
 				$('#login-form')[0].reset();
-				 
+				 //how to make error if bad password?
 				// $('#toast').text(data.err).addClass('alert-danger').show();
 			} else {
 				toggleLoggedin();

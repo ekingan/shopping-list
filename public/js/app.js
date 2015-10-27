@@ -25,11 +25,11 @@ $(document).ready(function(){
 	  			var itemHtml = "<li class='list-group' id='" + count + "'>" + 
 	  								"<div class=''>" +
 	  								"<label class='checkbox-inline'>" + 
-	  								"<input type='checkbox' id='checkbox' value='' name='checkbox' class='checkbox' data-id='" 
+	  								"<input type='checkbox' id='" + count + "' value='' name='checkbox' class='checkbox' data-id='" 
 	  								+ count + "'></label>"
 	  								+ item.name +  
-	  								"<progress max='100' value='100'>" +
-										"</progress>" +
+	  							// 	"<progress max='100' value='0'>" +
+										// "</progress>" +
 										"<div class='remove-item pull-right'>" +
 	  	 							"<button data-id='" + count + "' type='button' class='close'>" +
 	  	 							"<i class='icon ion-ios-trash-outline'></i></button></div></div>"; 
@@ -84,7 +84,9 @@ $(document).ready(function(){
 		var id = $(this).attr('data-id');
 		//Greys out check items
 		$('#' + id).toggleClass('grey');
-		$('progress').attr('value', 100);
+		$('.checkbox#' + id).append("<progress max='100' value='0'></progress>");
+										
+		// $('progress').attr('value', 100);
 		//adds time stamp
 		$.now();
 		$.get('/items/' + id + '/purchase', function (data){

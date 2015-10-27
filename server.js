@@ -45,26 +45,13 @@ app.get('/', function (req, res) {
 });
 //ARE THESE RIGHT?
 //Get Route for recipes
-// app.get('/items', function (req, res) {
-// 	db.Item.find({user: req.session.user._id}, function (err, items){
-// 		if (err){
-// 				console.log("error getting items from db");
-// 		}
-// 			console.log("these are the items, ", items);
-// 	db.Items.find({}, function(err, items){
-// 		if (err) {
-// 			console.log(err);
-// 		}
-// 		else {
-// 			console.log(items);	
-// 			items.forEach(item); 
-// 			itemName[i] = item[i].name;
-// 				console.log(itemName[i]);
-// 			}
-// 		}
-// 	);
-// 	});
-// });
+app.get('/items', function (req, res) {
+	console.log("get request recognised");
+	
+});
+
+			
+
 // 	var items;
 // 	var foods;
 // 	for (var i = 0; i < items.length; i++){
@@ -80,7 +67,27 @@ app.get('/', function (req, res) {
 // });
 
 app.get('/recipe', function (req, res) {
-	res.render('recipe', { foods: foods });
+
+		db.Item.find({user: req.session.user}, function (err, items){
+			console.log(req.session.user._id);
+			if (err){
+					console.log("error getting items from db");
+			}
+			else {
+				recipes = [];
+				items.forEach(function (item) {
+					var itemName = item.name;
+						request('http://food2fork.com/api/search?key='+FOOD_API_KEY+'&q=' + itemName + ',', function(error, response, body){
+							if (!error && response.statusCode == 200){
+			 // This API sends the data as a string so we need to parse it. This is not typical.
+		  					recipes.push(JSON.parse(body).recipes);
+		  					console.log(recipes);
+				  		} 
+				   	});
+				});
+				res.render('recipe', { recipes: recipes });
+			}
+		});
 });
 
 
