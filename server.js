@@ -35,7 +35,7 @@ app.get('/', function (req, res) {
 			if (err){
 				console.log("error getting items from db");
 			}
-			console.log("these are the items, ", items);
+			
 			res.render("index", {items: items});
 		});
 	} else {
@@ -47,10 +47,10 @@ app.get('/', function (req, res) {
 //Get Route for recipes
 // app.get('/items', function (req, res) {
 // 	console.log("get request recognised");
-	
+
 // });
 
-			
+
 
 // 	var items;
 // 	var foods;
@@ -69,37 +69,36 @@ app.get('/', function (req, res) {
 app.get('/recipe', function (req, res) {
 
 	db.Item.find({user: req.session.user}, function (err, items){
-			console.log(req.session.user._id);
-			if (err){
-					console.log("error getting items from db");
-			}
-			else {
-				itemNames = [];
-				var d = new Date();
-				var timeNow = d.getTime;
-				var timeLeft = req.item.expiresAt - timeNow;
-				items.forEach(function (item) {
-					while (timeLeft < 518820000000){
-				
-						items.forEach(function (item) {
-						var itemName = item.name;
-						itemNames.push(itemName);
-						console.log(itemNames);
-				
-				request('http://food2fork.com/api/search?key='+FOOD_API_KEY+'&q=' +  itemNames , function(error, response, body){
-					if (!error && response.statusCode == 200){
-	 // This API sends the data as a string so we need to parse it. This is not typical.
-  					
-  					recipes = (JSON.parse(body).recipes);
-  					console.log("this is recipes: " , recipes);
-  					console.log(recipes.length);
-						res.render('recipe', { recipes: recipes });	
-					}
+		// console.log(req.session.user._id);
+		if (err) {
+			console.log("error getting items from db");
+		} else {
+			
+			itemNames = [];
+			var d = new Date();
+			var timeNow = d.getTime;
+			items.forEach(function (item) {
+				var timeLeft = item.expiresAt - timeNow;
+				if (timeLeft < 518820000000) {  //4 days
+					var itemName = item.name;
+					itemNames.push(itemName);
+					console.log(itemNames);
 
+				}	
+			});
+
+			request('http://food2fork.com/api/search?key='+FOOD_API_KEY+'&q=' +  itemNames , function(error, response, body) {
+				if (!error && response.statusCode == 200){
+						// This API sends the data as a string so we need to parse it. This is not typical.
+
+						recipes = (JSON.parse(body).recipes);
+						console.log("this is recipes: " , recipes);
+						console.log(recipes.length);
+						res.render('recipe', { recipes: recipes });	
+					} else {
+						res.send("request failed");
+					}
 				});	
-					});
-					}	
-				});
 
 		}
 	});
@@ -128,7 +127,7 @@ app.post('/items', function (req, res){
 app.post('/guest', function (req, res){
 	var guest;
 	req.session.user = guest;
-		res.json({user: guest, msg: "user created"});
+	res.json({user: guest, msg: "user created"});
 
 });
 
@@ -167,7 +166,7 @@ app.get('/items/:id/purchase', function (req, res){
 			item.purchasedAt = new Date().getTime();
 			
 			item.expiresAt = (item.purchasedAt + item.shelfLife);
-		
+
 			item.save();
 			res.json(item);
 			
@@ -239,7 +238,7 @@ app.delete('/items/:id', function (req, res){
 //     var foundItem = foundUser.items.id(itemId);
 //     // update item name and completed with data from request body
 //     foundItem.name = req.body.item.name;
-    
+
 //     foundUser.save(function (err, savedUser) {
 //       res.json(foundItem);
 //       //need to include purchasedAt, expiresAt, shelfLife?
@@ -275,6 +274,6 @@ app.delete('/items/:id', function (req, res){
 
 
 app.listen(process.env.PORT || 3000, function() {
-  console.log("shopping list is running on port 3000");
+	console.log("shopping list is running on port 3000");
 });
 

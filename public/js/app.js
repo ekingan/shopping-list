@@ -28,8 +28,8 @@ $(document).ready(function(){
 	  								"<input type='checkbox' id='" + count + "' value='' name='checkbox' class='checkbox' data-id='" 
 	  								+ count + "'></label>"
 	  								+ item.name +  
-	  							// 	"<progress max='100' value='0'>" +
-										// "</progress>" +
+	  								"<progress id='" + count + "' max='100' value='0' hidden>" +
+										"</progress>" +
 										"<div class='remove-item pull-right'>" +
 	  	 							"<button data-id='" + count + "' type='button' class='close'>" +
 	  	 							"<i class='icon ion-ios-trash-outline'></i></button></div></div>"; 
@@ -84,64 +84,18 @@ $(document).ready(function(){
 		var id = $(this).attr('data-id');
 		//Greys out check items
 		$('#' + id).toggleClass('grey');
-		$("<progress max='100' value='100'></progress>").insertAfter('label');
+		$('.checkbox#' + id).append("<progress max='100' value='0'></progress>");
+		$("<progress max='100' value='100'></progress>").closest().insertBefore('label');
 										
-		// $('progress').attr('value', 100);
 		//adds time stamp
 		$.now();
 		$.get('/items/' + id + '/purchase', function (data){
-		
-	// 	});
-	// });
-	// 	$.ajax({
-	// 		url: '/items/' + id + '/purchase', 
-	// 		type: 'POST'
-	// 		// data: item._id.purchase
-	// 	})
-	// 		.done( function (data) { 
-	// 	$('#' + id).toggleClass('grey');
-	
-		// FIXME: what is this for? do we need it?
-		// var progressBar = function (item){
-		// 	console.log('in the progressBar function');
-		// 	var d = new Date();
-		// 	var timeNow = d.getTime();
-		// 	console.log(timeNow);
-		// 	var progress = 100 * ((item.expiresAt - timeNow)/item.shelfLife);
-		// 	$('progress').attr('value', progress);
-		// };
-	
-
-	// })
-	// 		.fail( function (data) {
-	// 			console.log('the data was: ' , data);
 
 		});
 	});		
 
 });
-//Checkboxes to remained checked after refresh
-	// $('.checkbox').on('change', function (){
-	// 	var checkboxValues = {};
-	// 	$('.checkbox').each(function (){
-	// 		checkboxValues[this.id] = this.checked;
-	// 	});
-		
-	// 	$.cookie('checkboxValues', checkboxValues, { expires: 365, path: '/'});
-	// });
 
-	// function repopulateCheckboxes(){
-	// 	var checkboxValues = $.cookie('checkboxValues');
-	// 	if (checkboxValues) {
-	// 		Object.keys(checkboxValues).forEach(function (element){
-	// 			var checked = checkboxValues[element];
-	// 			$('#' + element).prop('checked', checked);
-	// 		});
-	// 	}
-	// }
-	// $.cookie.json = true;
-	// repopulateFormElements();
-	
 	
 
 

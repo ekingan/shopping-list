@@ -2,9 +2,9 @@ console.log("Sanity Check: JS is working!");
 
 $(document).ready(function(){
 
-  $('#recipeSearchBtn').on('click', function(event) {
+  $('#recipeSearchBtn').on('click', function(e) {
 
-  	event.preventDefault();
+  	e.preventDefault();
 //send you to recipe.ejs template
 
 //clear recipe page
