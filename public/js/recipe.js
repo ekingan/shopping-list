@@ -15,7 +15,7 @@ $(document).ready(function(){
           type: 'GET', 
         })
         .done(function(data){
-          // window.location.href = "/recipe";
+          window.location.href = "/recipe";
           console.log(data);
         })
         .fail(function(data){

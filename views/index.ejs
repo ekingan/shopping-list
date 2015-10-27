@@ -132,7 +132,7 @@
             </div><!-- End of shelf life drop down menu -->
             <div class="form-group">
               <button type="submit" class="btn btn-primary">Add</button>
-              <a href='/recipe' class="btn btn-primary" id='recipeSearchBtn'>Recipes</a>
+              <a href='/recipe' class="btn btn-primary" >Recipes</a>
             </div>
          </form>
          </form><!-- end of form -->   
@@ -154,10 +154,10 @@
             <% if(timeNow < item.expiresAt) { var text = 'checked' }; %> 
             <%= text %> >
             </label> <%=item.name%>
-             <progress class='' max='100' value='<%=(100*((item.expiresAt - timeNow) / item.shelfLife))%>'> </progress>
+             <progress max='100' value='<%=((100*((item.expiresAt - timeNow) / item.shelfLife)))%>'> </progress>
               <div class='remove-item pull-right'>
                <button data-id='<%=item._id%>' type='button' class='close'>
-               <i class='icon ion-ios-trash-outline'></i>
+               <i class='icon ion-ios-trash-outline list-group'></i>
                </button>
               </div>
             </div>

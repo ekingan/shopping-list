@@ -10,7 +10,7 @@ var db = require("./models/index");
 var request = require('request');
 var dotenv = require('dotenv').load();
 var FOOD_API_KEY = process.env.FOOD_API_KEY;
-var foods;
+var recipes;
 var cookieParser = require('cookie-parser');
 
 
@@ -45,10 +45,10 @@ app.get('/', function (req, res) {
 });
 //ARE THESE RIGHT?
 //Get Route for recipes
-app.get('/items', function (req, res) {
-	console.log("get request recognised");
+// app.get('/items', function (req, res) {
+// 	console.log("get request recognised");
 	
-});
+// });
 
 			
 
@@ -68,26 +68,41 @@ app.get('/items', function (req, res) {
 
 app.get('/recipe', function (req, res) {
 
-		db.Item.find({user: req.session.user}, function (err, items){
+	db.Item.find({user: req.session.user}, function (err, items){
 			console.log(req.session.user._id);
 			if (err){
 					console.log("error getting items from db");
 			}
 			else {
-				recipes = [];
+				itemNames = [];
+				var d = new Date();
+				var timeNow = d.getTime;
+				var timeLeft = req.item.expiresAt - timeNow;
 				items.forEach(function (item) {
-					var itemName = item.name;
-						request('http://food2fork.com/api/search?key='+FOOD_API_KEY+'&q=' + itemName + ',', function(error, response, body){
-							if (!error && response.statusCode == 200){
-			 // This API sends the data as a string so we need to parse it. This is not typical.
-		  					recipes.push(JSON.parse(body).recipes);
-		  					console.log(recipes);
-				  		} 
-				   	});
+					while (timeLeft < 518820000000){
+				
+						items.forEach(function (item) {
+						var itemName = item.name;
+						itemNames.push(itemName);
+						console.log(itemNames);
+				
+				request('http://food2fork.com/api/search?key='+FOOD_API_KEY+'&q=' +  itemNames , function(error, response, body){
+					if (!error && response.statusCode == 200){
+	 // This API sends the data as a string so we need to parse it. This is not typical.
+  					
+  					recipes = (JSON.parse(body).recipes);
+  					console.log("this is recipes: " , recipes);
+  					console.log(recipes.length);
+						res.render('recipe', { recipes: recipes });	
+					}
+
+				});	
+					});
+					}	
 				});
-				res.render('recipe', { recipes: recipes });
-			}
-		});
+
+		}
+	});
 });
 
 
