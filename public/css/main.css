@@ -50,5 +50,11 @@ h2 {
  	/*text-align: center;
  	background-position: center
 */
-
+}
+.thumbnail {
+	max-width: 200px;
+	height: auto;
+}
+.caption {
+	
 }

@@ -28,7 +28,7 @@ $(document).ready(function(){
 	  								"<input type='checkbox' id='checkbox' value='' name='checkbox' class='checkbox' data-id='" 
 	  								+ count + "'></label>"
 	  								+ item.name +  
-	  								"<progress max='100' value='0'>" +
+	  								"<progress max='100' value='100'>" +
 										"</progress>" +
 										"<div class='remove-item pull-right'>" +
 	  	 							"<button data-id='" + count + "' type='button' class='close'>" +

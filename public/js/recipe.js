@@ -6,13 +6,14 @@ $(document).ready(function(){
 
   	event.preventDefault();
 //clears old results
-  	$('#results').empty();
+  	// $('#thumbnail').empty();
   		
-  			$.get('http://food2fork.com/api/search?key=key&q=' + chocolate , function(data){
-  				for (var i in data.data) {
-  					console.log(data.data[i]);
-  					$('#results').append("<a href='" + data.data[i].f2f_url + "'><img src='" + data.data[i].images.fixed_height.url + "'/></a>");
-  				}
+  			$.get('/items', function(data){
+          console.log(data);
+  				// for (var i in data.data) {
+  				// 	console.log(data.data[i]);
+  				// 	$('#thumbnail').append("<a href='" + data.data[i].f2f_url + "'><img src='" + data.data[i].images.fixed_height.url + "'/></a>");
+  				// }
   			});
   		
 

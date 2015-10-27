@@ -36,6 +36,7 @@ $('#guest').click(function (event) {
 				console.log(data);
 				$('.not-logged-in').modal('hide');
 				$('.not-logged-in').hide();
+				window.location.reload();
 			});  
 
 	});
