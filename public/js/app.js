@@ -84,7 +84,7 @@ $(document).ready(function(){
 		var id = $(this).attr('data-id');
 		//Greys out check items
 		$('#' + id).toggleClass('grey');
-		$('.checkbox#' + id).append("<progress max='100' value='0'></progress>");
+		$("<progress max='100' value='100'></progress>").insertAfter('label');
 										
 		// $('progress').attr('value', 100);
 		//adds time stamp
