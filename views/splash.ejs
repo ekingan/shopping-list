@@ -53,7 +53,7 @@
           <label for="password">Password</label>
           <input name='password' type="password" class="form-control" id="password" placeholder="Password">
         </div>
-        <button type="submit" class="btn btn-default login-btn" >Log In</button>
+        <button type="submit" class="btn btn-default login-btn">Log In</button>
       </form> <!-- End Log In Form -->
       </div>
     </div><!-- /.modal-content -->
@@ -66,7 +66,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Sign Up</h4>
+        <h4 class="modal-title">Sign Up</h4><br>
       </div>
       <div class="modal-body">
       <form id='signup-form'> <!-- Sign Up Form -->
@@ -83,33 +83,59 @@
           <input name='password-confirm' type="password" class="form-control" id="password" placeholder="Enter Password Again"> 
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
+        <button type='' class='btn btn-warning'>Log In as Guest</button>
       </form>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- End of Sign Up Modal -->
-
+<!-- Nav Bar -->
   <nav class='navbar nav-right'>
     <div class="container-fluid">
       <div class="navbar-header">
-  
+       
       </div>
+        <ul class="nav navbar-nav navbar-left">
+        <li><a class="navbar-brand" href="#"><strong>gather-it.</strong></a></li>
+        </ul>
         <ul class="nav navbar-nav navbar-right">
           <!-- <li><a href="#" id='guest' class='not-logged-in'>Guest</a></li> -->
           <li><a href='#' data-toggle='modal' data-target='#signup-modal' class='not-logged-in'>Sign Up</a></li>
           <li><a href='#' data-toggle='modal' data-target='#login-modal' class='not-logged-in'>Log In</a></li>
-          <li><a href="#" id='logout'>Log Out</a></li>
+          <li><a href="#" id='logout'  class='logged-in'>Log Out</a></li>
         </ul>
     </div>
    </nav>
-
+  <!-- Jumbotron  -->
   <div id="page-wrapper" class="container-fluid">
     <div class='row'>
       <div class='col-md-10 col-md-offset-1'>
-        <header class="page-header">
-          <h1>gather-it.</h1>
-        </header>
+        <!-- <header class="page-header"> -->
+          <div class="jumbotron">
+            <div class='container-fluid'>
+           <h1>Keep it fresh!</h1>
+             <p><a class="btn btn-primary" href="#" role="button" data-toggle='modal' data-target='#signup-modal'>Start your list</a></p>
+            </div>
+          </div>
+       <!--  </header> -->
+        <div class='row'>
+          <div class='col-md-4'>
+            <div class="well">
+            <h5>Easily create grocery lists that help keep track of your food so you can eat it at it's freshest. </h5>
+            </div>
+          </div>
+          <div class='col-md-4'>
+            <div class="well">
+            <h5>Frequently purchased items automatically appear on your list again when they have expired.</h5>
+            </div>
+          </div>
+          <div class='col-md-4'>
+            <div class="well">
+            <h5>Search for recipes based on the foods you have, prioritizing ingredients that may spoil soonest.</h5>
+            </div>
+          </div>
+        </div>
       </div>
      </div> 
     </div>

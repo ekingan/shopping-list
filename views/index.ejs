@@ -93,55 +93,60 @@
   <nav class='navbar nav-right'>
     <div class="container-fluid">
       <div class="navbar-header">
-
       </div>
-      <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-left">
+          <li><a class="navbar-brand" href="#"><strong>gather-it.</strong></a></li>
+          </ul>
+        <ul class="nav navbar-nav navbar-right">
         <!-- <li><a href="#" id='guest' class='not-logged-in'>Guest</a></li> -->
         <li><a href='#' data-toggle='modal' data-target='#signup-modal' class='not-logged-in'>Sign Up</a></li>
         <li><a href='#' data-toggle='modal' data-target='#login-modal' class='not-logged-in'>Log In</a></li>
-        <li><a href="#" id='logout'>Log Out</a></li>
+        <li><a href="#" id='logout' class='logged-in'>Log Out</a></li>
       </ul>
     </div>
   </nav>
 
-  <div id="page-wrapper" class="container-fluid">
-    <div class='row'>
-      <div class='col-md-10 col-md-offset-1'>
-        <header class="page-header">
-          <h1>gather-it.</h1>
-        </header>
-      </div>
-    </div> 
-    <!-- Add new item form: -->
-    <div class="row"><!-- first row -->
-      <div class='col-xs-12 col-md-10 col-md-offset-2'><!-- first column -->
-        <form action="" method="POST" role="form" class='form-inline' id='new-item-form'>
-          <form type='hidden' value='none' id='hidden-form'>
-            <div class="form-group">
-              <input type="text" class="form-control" id="item-input" placeholder="New Item" name='name'>
-            </div>
-            <div class="dropdown form-group"><!--  Shelf life drop-down menu -->
-              <select class='form-control' name="shelfLife">
-                <option value="60000">  Shelf Life</option>
-                <option value="345600000">Eat it soon!</option>
-                <option value="604800000">Eat it this week</option>
-                <option value="1209600000">Eat it within 2 weeks</option>
-                <option value="2592000000">It will stay fresh all month</option>
-                <option value="15552000000">This lasts forever!</option>
-              </select>
-            </div><!-- End of shelf life drop down menu -->
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary">Add</button>
-              <a href='/recipe' class="btn btn-primary" >Recipes</a>
-            </div>
-          </form>
-        </form><!-- end of form -->   
-      </div><!-- end of first column -->   
-    </div> <!-- end of first row --> 
+ 
+  <header class="page-header">
+    <div id="page-wrapper" class="container-fluid">
+      <div class='row'>
+        <div class='col-md-10 col-md-offset-1'>
+          
+                 <!-- Add new item form: -->
+          <div class="row"><!-- first row -->
+            <!-- <div class="col-md-4 ">
+              <h1> gather-it. </h1>
+            </div> -->
+              <div class='col-xs-12 col-md-8'><!-- first column -->
+                <form action="" method="POST" role="form" class='form-inline' id='new-item-form'>
+                  <form type='hidden' value='none' id='hidden-form'>
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="item-input" placeholder="New Item" name='name'>
+                    </div>
+                    <div class="dropdown form-group"><!--  Shelf life drop-down menu -->
+                      <select class='form-control' name="shelfLife">
+                        <option value="60000">  Shelf Life</option>
+                        <option value="345600000">Eat it soon!</option>
+                        <option value="604800000">Eat it this week</option>
+                        <option value="1209600000">Eat it within 2 weeks</option>
+                        <option value="2592000000">It will stay fresh all month</option>
+                        <option value="15552000000">This lasts forever!</option>
+                      </select>
+                    </div><!-- End of shelf life drop down menu -->
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-primary">Add</button>
+                      <a href='/recipe' class="btn btn-primary" >Recipes</a>
+                    </div>
+                  </form>
+                </form><!-- end of form -->   
+              </div><!-- end of first column -->   
+            </div> <!-- end of first row -->
+          </header>
+        </div>
+      </div> 
+    
     <div class="row"> <!--second row-->
       <div class='col-xs-10 col-xs-offset-1 col-md-6 col-mid-offset-3'><!-- first column -->
-        <hr>
-        <h2> your list</h2>
         <hr>
         <ul class="list-unstyled" id="list-items-ul">
           <% items.reverse().forEach(function(item) { var d = new Date();

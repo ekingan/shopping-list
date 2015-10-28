@@ -116,8 +116,12 @@ app.post('/items', function (req, res){
 app.post('/users', function (req, res){
 	var user = req.body;
 	db.User.createSecure(user.email, user.password, function (err, user){
+		if (err) {
+      res.send({err: err.errors});
+    } else {
 		req.session.user = user;
 		res.json({user: user, msg: "user created"});
+		}
 	});
 });
 
@@ -155,24 +159,6 @@ app.get('/items/:id/purchase', function (req, res){
 		res.json(item);
 	});
 });
-
-// remove time stamp
-// app.put('items/:id/purchase', function (req, res) {
-// 	db.Item.findById(req.params.id, function (err, item) {
-// 		if (err) {
-// 			console.log("error in nullifying purchase date");
-// 		} else {
-// 			item.purchasedAt = 0;
-// 			item.shelfLife = 0;
-// 			item.expiresAt = 0;
-
-// 			item.save();
-// 			res.json(item);	
-// 			console.log("this is the item: ", item);
-// 		}
-
-// 	});
-// });
 
 //get signup
 app.get('/signup', function (req, res) {

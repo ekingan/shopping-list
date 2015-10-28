@@ -1,6 +1,7 @@
 function toggleLoggedin() {
 	$('#login-modal').modal('hide');
 	$('.not-logged-in').hide();
+	$('.logged-in').show();
 }
 
 function checkAuth() {
@@ -18,6 +19,7 @@ function checkAuth() {
 
 $(document).ready(function (){
 	$('#email').focus();
+	$('.logged-in').hide();
 //checks if user is logged in
 	checkAuth();
 	//Sign in as guest
@@ -49,7 +51,7 @@ $('#guest').click(function (event) {
 
 		$.post('/login', user, function (data) {
 			
-			if (data.err) {	
+			if (data.error) {	
 				console.log(data.err);
 				$('.collapse').show();
 				$('#login-form')[0].reset();

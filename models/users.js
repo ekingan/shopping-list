@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
 		email: String,
-		passwordDigest: String
+		passwordDigest: { type: String, required: true }
 	
 });
 
