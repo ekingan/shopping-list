@@ -143,17 +143,36 @@ app.get('/items/:id/purchase', function (req, res){
 		if (err){
 			console.log("error adding purchase date");
 		} else {
-			
-			item.purchasedAt = new Date().getTime();
-			
-			item.expiresAt = (item.purchasedAt + item.shelfLife);
-
-			item.save();
-			res.json(item);
-			
+			if (item.purchasedAt) {
+				item.purchasedAt = null;
+				item.expiresAt = null;
+			} else {
+				item.purchasedAt = new Date().getTime();
+				item.expiresAt = (item.purchasedAt + item.shelfLife);
+			}
 		}
+		item.save();
+		res.json(item);
 	});
 });
+
+// remove time stamp
+// app.put('items/:id/purchase', function (req, res) {
+// 	db.Item.findById(req.params.id, function (err, item) {
+// 		if (err) {
+// 			console.log("error in nullifying purchase date");
+// 		} else {
+// 			item.purchasedAt = 0;
+// 			item.shelfLife = 0;
+// 			item.expiresAt = 0;
+
+// 			item.save();
+// 			res.json(item);	
+// 			console.log("this is the item: ", item);
+// 		}
+
+// 	});
+// });
 
 //get signup
 app.get('/signup', function (req, res) {

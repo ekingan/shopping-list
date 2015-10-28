@@ -28,7 +28,7 @@ $(document).ready(function(){
 	  								"<input type='checkbox' id='" + count + "' value='' name='checkbox' class='checkbox' data-id='" 
 	  								+ count + "'></label>"
 	  								+ item.name +  
-	  								"<progress max='100' value='0'></progress>" +
+	  								"<progress max='100' value='0' data-id='" + count + "'></progress>" +
 										"<div class='remove-item pull-right'>" +
 	  	 							"<button data-id='" + count + "' type='button' class='close'>" +
 	  	 							"<i class='icon ion-ios-trash-outline'></i></button></div></div></li>"; 
@@ -80,24 +80,50 @@ $(document).ready(function(){
 
 //Event handler for checkbox
 	$('#list-items-ul').on('click', '.checkbox', function (){
-		var id = $(this).attr('data-id');
-		//Greys out check items
-		$('#' + id).toggleClass('grey');
-		// if ($(this).is( ":checked" )) {
-		// 	$(this).parent().siblings('progress').show('display', 'none');
-		// } else {
-		// 	$(this).parent().siblings('progress').hide();
-		// }
 		
-										
-		//adds time stamp
-		$.now();
-		$.get('/items/' + id + '/purchase', function (data){
+		var id = $(this).attr('data-id');
+		console.log("this is : " , $(this));
+		console.log("this is the id of this: " , id);	
+		//Greys out check items
+		
+		//if the checkbox is checked, 
+		//make purchase date null and make progress bar val = 0
+			// if ($('#' + id).is(':checked')) {
+					
+			// 	$.ajax({
+			// 		url: '/items/' + id + '/purchase',
+			// 		type: 'PUT'
+			// 	})
+			// 		.done(function (data){
+			// 			 console.log("unchecking item ", data);
+			// 			 $('progress[data-id = ' + id + ']').attr('value', '0');
 
-		});
-	});		
+			// 		})
+			// 		.fail(function (data) {
+			// 			console.log("failed to uncheck item ", data);
+			// 		});
+			// 	} else {
+			//adds time stamp (do i need this?)
+			//how to i make this be a data id
+					$('progress[data-id = ' + id + ']').attr('value', '100');
+					$.now();
+					$.get('/items/' + id + '/purchase', function (data){
+						$('#' + id).toggleClass('grey');
+						if (!data.purchasedAt) {
+							$('progress[data-id = ' + id + ']').attr('value', '0');
+						}
+					});
+				// }	
+
+	});
 
 });
+					
+			
+
+
+		
+
 
 	
 
