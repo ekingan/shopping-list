@@ -1,0 +1,9 @@
+request.get(requestOptions, function(error, apiResponse, body) {
+	console.log(requestOptions);
+} );
+var searchURL = '';
+var requestOptions = {
+	url: searchURL,
+	method: 'GET',
+	qs: queryStringObj
+};

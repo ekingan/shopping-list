@@ -12,6 +12,7 @@ var dotenv = require('dotenv').load();
 var FOOD_API_KEY = process.env.FOOD_API_KEY;
 var recipes;
 var cookieParser = require('cookie-parser');
+var requestOptions = {};
 
 
 //MIDDLEWARE
@@ -66,6 +67,8 @@ app.get('/', function (req, res) {
 //   };
 // });
 
+
+
 app.get('/recipe', function (req, res) {
 
 	db.Item.find({user: req.session.user}, function (err, items){
@@ -73,25 +76,29 @@ app.get('/recipe', function (req, res) {
 		if (err) {
 			console.log("error getting items from db");
 		} else {
-			
+
 			itemNames = [];
 			var d = new Date();
-			var timeNow = d.getTime;
+			var timeNow = d.getTime();
 			items.forEach(function (item) {
+				console.log("in for each function")
 				var timeLeft = item.expiresAt - timeNow;
-				if (timeLeft < 518820000000) {  //4 days
-					var itemName = item.name;
-					itemNames.push(itemName);
-					console.log(itemNames);
 
-				}	
+				
+				if (timeLeft < 1209600000) {  //4 days 518820000000 342533850
+					var itemName = item.name;
+					console.log(itemName);
+					itemNames.push(itemName);
+					console.log("this is item names 1: ", itemNames);
+				}	else {
+					console.log("timeLeft was more than 1209600000: ", timeLeft);
+				}
 			});
 
-			request('http://food2fork.com/api/search?key='+FOOD_API_KEY+'&q=' +  itemNames , function(error, response, body) {
+			request('http://food2fork.com/api/search?key='+FOOD_API_KEY+'&q=' +  itemNames + '' , function(error, response, body) {
 				if (!error && response.statusCode == 200){
-						// This API sends the data as a string so we need to parse it. This is not typical.
-
-						recipes = (JSON.parse(body).recipes);
+						console.log("this is item names 2: ", itemNames);
+						var recipes = JSON.parse(body).recipes;
 						console.log("this is recipes: " , recipes);
 						console.log(recipes.length);
 						res.render('recipe', { recipes: recipes });	

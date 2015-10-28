@@ -17,6 +17,7 @@ progress {
 	 position: absolute;
     left:50%;
     margin-left:-20px;
+  display: inline;
 
 }
 .grey {
@@ -37,6 +38,12 @@ h2 {
 	color: #0099FF;
 	font-size: 36px	;
 	font-weight: normal;
+}
+
+h4 {
+	color: #0099ff;
+	font-size: 24px;
+	text-align: center;
 }
 
 .input-item {

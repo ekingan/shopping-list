@@ -141,14 +141,14 @@
     <div class="row"> <!--second row-->
       <div class='col-xs-10 col-xs-offset-1 col-md-6 col-mid-offset-3'><!-- first column -->
         <hr>
-        <h2> your list</h2>
+        <h4> Keeps track of your food so you don't have to.</h4>
         <hr>
         <ul class="list-unstyled" id="list-items-ul">
           <% items.reverse().forEach(function(item) { var d = new Date();
           var timeNow = d.getTime(); %>
           <li class='list-group <% if(timeNow < item.expiresAt) { var checkedClass = 'grey' }; %> 
           <%= checkedClass %>' id='<%= item._id %>'>
-           <div class=''>
+           <div class='list-group inline'>
             <label class='checkbox-inline'>
             <input type='checkbox' id='checkbox' name='checkbox' class='checkbox' data-id='<%=item._id%>' 
             <% if(timeNow < item.expiresAt) { var text = 'checked' }; %> 

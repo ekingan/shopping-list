@@ -23,16 +23,16 @@ $(document).ready(function(){
 	  			count = item._id;
 			  	
 	  			var itemHtml = "<li class='list-group' id='" + count + "'>" + 
-	  								"<div class=''>" +
+	  								"<div class='list-group inline'>" +
 	  								"<label class='checkbox-inline'>" + 
 	  								"<input type='checkbox' id='" + count + "' value='' name='checkbox' class='checkbox' data-id='" 
 	  								+ count + "'></label>"
-	  								+ item.name +  
-	  								"<progress id='" + count + "' max='100' value='0' hidden>" +
+	  								+ item.name + "                             " 
+	  								"<progress max='100' value='100' style='inline-block' hidden>" +
 										"</progress>" +
 										"<div class='remove-item pull-right'>" +
 	  	 							"<button data-id='" + count + "' type='button' class='close'>" +
-	  	 							"<i class='icon ion-ios-trash-outline'></i></button></div></div>"; 
+	  	 							"<i class='icon ion-ios-trash-outline'></i></button></div></div></li>"; 
 	  	 								
 	  	
 
@@ -84,8 +84,12 @@ $(document).ready(function(){
 		var id = $(this).attr('data-id');
 		//Greys out check items
 		$('#' + id).toggleClass('grey');
-		$('.checkbox#' + id).append("<progress max='100' value='0'></progress>");
-		$("<progress max='100' value='100'></progress>").closest().insertBefore('label');
+		if ($(this).is( ":checked" )) {
+			$(this).parent().siblings('progress').css('display', 'none');
+		} else {
+			$(this).parent().siblings('progress').hide();
+		}
+		
 										
 		//adds time stamp
 		$.now();
@@ -98,8 +102,13 @@ $(document).ready(function(){
 
 	
 
+// $('.checkbox').on('click', function(e) {
+// e.preventDefault();
+// console.log("id of checkbox is:", $(this).data().id);
+// })
 
-
-
+// var checkbox = $(this);
+// $($('.checkbox')[0]).parent().siblings().show();
+// $($('.checkbox')[0]).parent().siblings().hide();
 
 
