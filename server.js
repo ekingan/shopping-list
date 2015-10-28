@@ -13,6 +13,7 @@ var FOOD_API_KEY = process.env.FOOD_API_KEY;
 var recipes;
 var cookieParser = require('cookie-parser');
 var requestOptions = {};
+var seeder = require('mongoose-seed');
 
 
 //MIDDLEWARE
@@ -61,7 +62,7 @@ app.get('/recipe', function (req, res) {
 			var d = new Date();
 			var timeNow = d.getTime();
 			items.forEach(function (item) {
-				console.log("in for each function")
+				
 				var timeLeft = item.expiresAt - timeNow;
 
 				

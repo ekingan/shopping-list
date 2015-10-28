@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+var seeder = require('mongoose-seed');
 mongoose.connect(
   process.env.MONGOLAB_URI ||
   process.env.MONGOHQ_URL ||
