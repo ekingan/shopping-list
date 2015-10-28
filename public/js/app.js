@@ -23,13 +23,12 @@ $(document).ready(function(){
 	  			count = item._id;
 			  	
 	  			var itemHtml = "<li class='list-group' id='" + count + "'>" + 
-	  								"<div class='list-group inline'>" +
+	  								"<div>" +
 	  								"<label class='checkbox-inline'>" + 
 	  								"<input type='checkbox' id='" + count + "' value='' name='checkbox' class='checkbox' data-id='" 
 	  								+ count + "'></label>"
-	  								+ item.name + "                             " 
-	  								"<progress max='100' value='100'>" +
-										"</progress>" +
+	  								+ item.name +  
+	  								"<progress max='100' value='0'></progress>" +
 										"<div class='remove-item pull-right'>" +
 	  	 							"<button data-id='" + count + "' type='button' class='close'>" +
 	  	 							"<i class='icon ion-ios-trash-outline'></i></button></div></div></li>"; 
@@ -85,7 +84,7 @@ $(document).ready(function(){
 		//Greys out check items
 		$('#' + id).toggleClass('grey');
 		// if ($(this).is( ":checked" )) {
-		// 	$(this).parent().siblings('progress').css('display', 'none');
+		// 	$(this).parent().siblings('progress').show('display', 'none');
 		// } else {
 		// 	$(this).parent().siblings('progress').hide();
 		// }
