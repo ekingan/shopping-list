@@ -27,8 +27,12 @@ userSchema.statics.authenticate = function (email, password, callback) {
 		if (!user) {
 			console.log('No user with email: ' + email, null);
 			callback("No user found", null);
-		} else if (user.checkPassword(password)) {
-			callback (null, user);
+		} else {
+			if (user.checkPassword(password)) {
+				callback (null, user);
+			} else {
+				callback("Email and password do not match", null);
+			}
 		}
 	});
 };

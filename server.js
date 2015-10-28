@@ -130,9 +130,10 @@ app.post('/login', function (req, res){
 	var user = req.body;
 	db.User.authenticate(user.email, user.password, function (err, user){
 		if (err) {
-			console.log("there was an err " , err);
+			console.log("there was an error " , err);
 			res.json({err: err});
 		} else {
+			console.log("user exists!, Logged in");
 			req.session.user = user;
 			res.json(user);
 		}

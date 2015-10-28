@@ -34,6 +34,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
+        <div class='alert' id='alert' style="display:none;"></div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title">Log In</h4>
         </div>
@@ -41,7 +42,7 @@
           <!-- Warning for bad login -->
           <div class="alert alert-warning alert-dismissible collapse" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Oh no!</strong> That login does not exist.
+            <strong>Oh no!</strong> Something went wrong, please try again.
           </div>
           <!-- End of warning -->
           <form id="login-form" > <!-- Log In Form -->
@@ -89,7 +90,7 @@
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
   <!-- End of Sign Up Modal -->
-
+  
   <nav class='navbar nav-right'>
     <div class="container-fluid">
       <div class="navbar-header">
@@ -99,6 +100,7 @@
           </ul>
         <ul class="nav navbar-nav navbar-right">
         <!-- <li><a href="#" id='guest' class='not-logged-in'>Guest</a></li> -->
+        <li><a href='/recipe' class="btn btn-primary" >Get Recipes</a>
         <li><a href='#' data-toggle='modal' data-target='#signup-modal' class='not-logged-in'>Sign Up</a></li>
         <li><a href='#' data-toggle='modal' data-target='#login-modal' class='not-logged-in'>Log In</a></li>
         <li><a href="#" id='logout' class='logged-in'>Log Out</a></li>
@@ -125,17 +127,16 @@
                     </div>
                     <div class="dropdown form-group"><!--  Shelf life drop-down menu -->
                       <select class='form-control' name="shelfLife">
-                        <option value="60000">  Shelf Life</option>
-                        <option value="345600000">Eat it soon!</option>
-                        <option value="604800000">Eat it this week</option>
-                        <option value="1209600000">Eat it within 2 weeks</option>
-                        <option value="2592000000">It will stay fresh all month</option>
-                        <option value="15552000000">This lasts forever!</option>
+                        <option value="345600000">Stays fresh for: 4 days</option>
+                        <option value="604800000">1 week</option>
+                        <option value="1209600000">2 weeks</option>
+                        <option value="2592000000">1 month</option>
+                        <option value="31104000000">1 year</option>
                       </select>
                     </div><!-- End of shelf life drop down menu -->
                     <div class="form-group">
                       <button type="submit" class="btn btn-primary">Add</button>
-                      <a href='/recipe' class="btn btn-primary" >Recipes</a>
+                      
                     </div>
                   </form>
                 </form><!-- end of form -->   

@@ -34,15 +34,16 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
+      <div class='alert' id='alert' style="display:none;"></div>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Log In</h4>
       </div>
       <div class="modal-body" >
               <!-- Warning for bad login -->
-        <div class="alert alert-warning alert-dismissible collapse" role="alert">
+        <!-- <div class="alert alert-warning alert-dismissible collapse" role="alert">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <strong>Oh no!</strong> That login does not exist.
-        </div>
+          <strong>Oh no!</strong> Something went wrong, please try again.
+        </div> -->
         <!-- End of warning -->
                 <form id="login-form" > <!-- Log In Form -->
         <div class="form-group">
@@ -91,6 +92,7 @@
 </div><!-- /.modal -->
 <!-- End of Sign Up Modal -->
 <!-- Nav Bar -->
+
   <nav class='navbar nav-right'>
     <div class="container-fluid">
       <div class="navbar-header">
@@ -114,7 +116,7 @@
         <!-- <header class="page-header"> -->
           <div class="jumbotron">
             <div class='container-fluid'>
-           <h1>Keep it fresh!</h1>
+           <h2><strong>a smart way to gather your groceries</strong></h2>
              <p><a class="btn btn-primary" href="#" role="button" data-toggle='modal' data-target='#signup-modal'>Start your list</a></p>
             </div>
           </div>

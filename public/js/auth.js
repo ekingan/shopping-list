@@ -14,7 +14,10 @@ function checkAuth() {
 		}
 	});
 }
-
+function alertHandler(msg, type) {
+  $('#alert').addClass(type).text(msg).fadeIn();
+  setTimeout(function() { $('#alert').fadeOut().text('').removeClass(type); }, 3000);
+}
 
 
 $(document).ready(function (){
@@ -51,8 +54,9 @@ $('#guest').click(function (event) {
 
 		$.post('/login', user, function (data) {
 			
-			if (data.error) {	
+			if (data.err) {	
 				console.log(data.err);
+				alertHandler(data.err, 'alert-warning');
 				$('.collapse').show();
 				$('#login-form')[0].reset();
 				 //how to make error if bad password?
