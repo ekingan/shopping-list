@@ -40,32 +40,12 @@ app.get('/', function (req, res) {
 			res.render("index", {items: items});
 		});
 	} else {
-		res.render('index', {items: [{name: 'strawberries'}, {name: 'peaches'}, {name: 'bacon'}]}); //put fake items
+				res.render('splash');
+		// res.render('index', {items: [{name: 'strawberries'}, {name: 'peaches'}, {name: 'bacon'}]}); //put fake items
 
 	}
 });
-//ARE THESE RIGHT?
-//Get Route for recipes
-// app.get('/items', function (req, res) {
-// 	console.log("get request recognised");
 
-// });
-
-
-
-// 	var items;
-// 	var foods;
-// 	for (var i = 0; i < items.length; i++){
-// 		 items = item[i].name;
-// 		console.log(items);
-// 		request('http://food2fork.com/api/search?key='+FOOD_API_KEY+'&q=' + item[i].name + ',', function(error, response, body){
-// 			if (!error && response.statusCode == 200){
-// 		 // This API sends the data as a string so we need to parse it. This is not typical.
-//     	foods = JSON.parse(body).recipes;
-//   		} 
-//   	}
-//   };
-// });
 
 
 
@@ -130,13 +110,7 @@ app.post('/items', function (req, res){
 
 });
 
-//create guest
-app.post('/guest', function (req, res){
-	var guest;
-	req.session.user = guest;
-	res.json({user: guest, msg: "user created"});
 
-});
 
 //create new user
 app.post('/users', function (req, res){
@@ -180,10 +154,7 @@ app.get('/items/:id/purchase', function (req, res){
 		}
 	});
 });
-//get guest
-app.get('/guest', function (req, res){
-	res.render('guest');
-});
+
 //get signup
 app.get('/signup', function (req, res) {
 	res.render('signup');
@@ -215,69 +186,6 @@ app.delete('/items/:id', function (req, res){
 	});
 });
 
-//Routed to work with embeded data
-// create todo embedded in list
-// app.post('/users/:userId/items', function (req, res) {
-//   // set the value of the user id
-//   var userId = req.params.userId;
-
-//   // store new item in memory with data from request body
-//   var newItem = new Item(req.body.item);
-
-//   // find user in db by id and add new item
-//   User.findOne({_id: userId}, function (err, foundUser) {
-//     foundUser.items.push(newItem);
-//     foundUser.save(function (err, savedUser) {
-//       res.json(newItem);
-//     });
-//   });
-// });
-
-// // update item embedded in list
-// app.put('/user/:userId/items/:id', function (req, res) {
-//   // set the value of the user and item ids
-//   var userId = req.params.userId;
-//   var itemId = req.params.id;
-
-//   // find user in db by id
-//   User.findOne({_id: userId}, function (err, foundUser) {
-//     // find item embedded in list
-//     var foundItem = foundUser.items.id(itemId);
-//     // update item name and completed with data from request body
-//     foundItem.name = req.body.item.name;
-
-//     foundUser.save(function (err, savedUser) {
-//       res.json(foundItem);
-//       //need to include purchasedAt, expiresAt, shelfLife?
-//     });
-//   });
-// });
-// // delete item embedded in list
-// app.delete('/user/:userId/items/:id', function (req, res) {
-//   // set the value of the list and todo ids
-//   var userId = req.params.userId;
-//   var itemId = req.params.id;
-
-//   // find user in db by id
-//   User.findOne({_id: userId}, function (err, foundUser) {
-//     // find item embedded in user
-//     var foundItem = foundUser.items.id(itemId);
-//     // remove item
-//     foundItem.remove();
-//     foundUser.save(function (err, savedUser) {
-//       res.json(foundItem);
-//     });
-//   });
-// });
-
-// app.get('/', function (req, res) {
-// 	console.log(req.cookies.message);
-// 	res.cookie("message", "hello again");
-// 	res.send("hello cookie");
-// });
-
-// //UPDATE
-// //SHOW
 
 
 app.listen(process.env.PORT || 3000, function() {

@@ -28,7 +28,7 @@ $(document).ready(function(){
 	  								"<input type='checkbox' id='" + count + "' value='' name='checkbox' class='checkbox' data-id='" 
 	  								+ count + "'></label>"
 	  								+ item.name + "                             " 
-	  								"<progress max='100' value='100' style='inline-block' hidden>" +
+	  								"<progress max='100' value='100'>" +
 										"</progress>" +
 										"<div class='remove-item pull-right'>" +
 	  	 							"<button data-id='" + count + "' type='button' class='close'>" +
@@ -84,11 +84,11 @@ $(document).ready(function(){
 		var id = $(this).attr('data-id');
 		//Greys out check items
 		$('#' + id).toggleClass('grey');
-		if ($(this).is( ":checked" )) {
-			$(this).parent().siblings('progress').css('display', 'none');
-		} else {
-			$(this).parent().siblings('progress').hide();
-		}
+		// if ($(this).is( ":checked" )) {
+		// 	$(this).parent().siblings('progress').css('display', 'none');
+		// } else {
+		// 	$(this).parent().siblings('progress').hide();
+		// }
 		
 										
 		//adds time stamp
