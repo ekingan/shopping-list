@@ -48,8 +48,6 @@ $('#guest').click(function (event) {
 				window.location.reload();
 			});  
 
-			$.post()
-
 	});
 	//log in form
 	$('#login-form').submit(function (event) {
