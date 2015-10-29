@@ -10,11 +10,14 @@ $(document).ready(function(){
   	event.preventDefault();
 // var item = $('#item-input').val();
 		var item = $('#new-item-form').serialize();
+		console.log("this is the serialized item: " + item);
 
   	
   	if ($('#item-input').val() !== ''){
 
-	  	$.ajax({
+		
+
+  	$.ajax({
 	  		url: '/items', 
 	  		type: 'POST', 
 	  		data: item
@@ -32,17 +35,15 @@ $(document).ready(function(){
 										"<div class='remove-item pull-right'>" +
 	  	 							"<button data-id='" + count + "' type='button' class='close'>" +
 	  	 							"<i class='icon ion-ios-trash-outline'></i></button></div></div></li>"; 
-	  	 								
-	  	
-
+	  	 							
 					$('#list-items-ul').prepend(itemHtml);
-					
 					$('#new-item-form')[0].reset();
 			})
-
 				.fail(function (data){
  					console.log("item was not added");
   		});
+		
+
 		} else {
 				console.log("your form is blank");
 			}

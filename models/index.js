@@ -17,3 +17,4 @@ db.once('open', function (callback) {
 
 module.exports.Item = require('./items.js');
 module.exports.User = require('./users.js');
+module.exports.Seed = require('./seed.js');

@@ -36,15 +36,18 @@ $('#guest').click(function (event) {
 //gets new user on signup
 	$('#signup-form').submit(function (event){
 			event.preventDefault();
-			
 			var user = $(this).serialize();
+			var kale = 'name=kale&shelfLife=1209600000';
+			var apples = 'name=apples&shelfLife=1209600000';
+			var carrots = 'name=carrots&shelfLife=1209600000';
 
 			$.post('/users', user, function (data){
-				console.log(data);
 				$('.not-logged-in').modal('hide');
 				$('.not-logged-in').hide();
+
 				window.location.reload();
 			});  
+			
 
 	});
 	//log in form

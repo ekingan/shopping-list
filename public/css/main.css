@@ -58,9 +58,10 @@ h4 {
 	opacity: 1;
 }
 
+
 .jumbotron {
     position: right;
-    background: #000 url("bag-of-food-large.jpg") top center;
+    background: #000 url("GroceryBag.jpg") top center;
     width: 100%;
     height: 100%;
     background-size: cover;
