@@ -1,15 +1,16 @@
 #page-wrapper {
-	background-color: white;
-	
+	background-color: white;	
 }
 
 .dropdown {
 	cursor: pointer;
-
 }
 .dropdown li:hover {
 	background-color: grey;
 	color: white;
+}
+body {
+	font-family: 'Muli', sans-serif;
 }
 
 progress {

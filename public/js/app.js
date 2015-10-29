@@ -15,8 +15,6 @@ $(document).ready(function(){
   	
   	if ($('#item-input').val() !== ''){
 
-		
-
   	$.ajax({
 	  		url: '/items', 
 	  		type: 'POST', 
@@ -97,6 +95,12 @@ $(document).ready(function(){
 				
 
 	});
+
+});
+
+$('#back').on('click', function (event) {
+	event.preventDefault();
+	location.href="/";
 
 });
 					

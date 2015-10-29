@@ -60,21 +60,25 @@ app.get('/recipe', function (req, res) {
 			var timeNow = d.getTime();
 			items.forEach(function (item) {
 				var timeLeft = item.expiresAt - timeNow;
-				if (timeLeft < 1209600000) {  //4 days 518820000000 342533850
+				if (timeLeft < 604800000) {  //4 days 518820000000 342533850
 					var itemName = item.name;
 					itemNames.push(itemName);	
 				}	else {console.log("timeLeft was more than 1209600000: ", timeLeft);}	
 			});
-				request('http://food2fork.com/api/search?key='+FOOD_API_KEY+'&q=' +  itemNames + '' , function(error, response, body) {
+				console.log("this is itemNames: " , itemNames);
+				request('http://food2fork.com/api/search?key='+FOOD_API_KEY+'&q=' + itemNames , function(error, response, body) {
 					if (!error && response.statusCode == 200){
 							var recipes = JSON.parse(body).recipes;
-								if (recipes.length > 10){
+							console.log("these are your recipes, the first search worked: ", recipes);
+								if (recipes.length > 1){
 									res.render('recipe', { recipes: recipes }); }
 								else {
 										var i = (Math.floor(Math.random() * items.length));
+										console.log("this is the name of the item being searched for : " , items[i].name);
 										request('http://food2fork.com/api/search?key='+FOOD_API_KEY+'&q=' +  items[i].name + '' , function(error, response, body) {
 											if (!error && response.statusCode == 200){
 											var recipes = JSON.parse(body).recipes;
+											console.log("these are your recipes, the random search worked: ", recipes);
 											res.render('recipe', { recipes: recipes });
 											}
 										});

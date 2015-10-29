@@ -47,7 +47,8 @@ $('#guest').click(function (event) {
 
 				window.location.reload();
 			});  
-			
+
+			$.post()
 
 	});
 	//log in form
