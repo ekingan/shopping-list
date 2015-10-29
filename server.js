@@ -135,6 +135,7 @@ app.post('/login', function (req, res){
 			res.json({err: err});
 		} else {
 			console.log("user exists!, Logged in");
+			console.log('user = ', user);
 			req.session.user = user;
 			res.json(user);
 		}

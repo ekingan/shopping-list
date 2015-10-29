@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 		salt = bcrypt.genSaltSync(10);
 
 var userSchema = mongoose.Schema({
-		email: String,
+		email: {type: String, unique: true, required: true},
 		passwordDigest: { type: String, required: true }
 	
 });

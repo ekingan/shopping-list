@@ -51,13 +51,14 @@ $('#guest').click(function (event) {
 	$('#login-form').submit(function (event) {
 		event.preventDefault();
 		var user = $(this).serialize();
+		console.log(user);
 
 		$.post('/login', user, function (data) {
 			
 			if (data.err) {	
 				console.log(data.err);
 				alertHandler(data.err, 'alert-warning');
-				$('.collapse').show();
+				
 				$('#login-form')[0].reset();
 				 //how to make error if bad password?
 				// $('#toast').text(data.err).addClass('alert-danger').show();
@@ -68,6 +69,31 @@ $('#guest').click(function (event) {
 			}
 		});
 	});
+
+	//for guest login 
+	$('#login-guest').click(function (event) {
+		event.preventDefault();
+		//serialized login
+		var user = 'email=one%40test.com&password=password';
+
+		$.post('/login', user, function (data) {
+			
+			if (data.err) {	
+				console.log(data.err);
+				alertHandler(data.err, 'alert-warning');
+				
+				$('#login-form')[0].reset();
+				 //how to make error if bad password?
+				// $('#toast').text(data.err).addClass('alert-danger').show();
+			} else {
+				toggleLoggedin();
+				$('#login-form').val('');
+				window.location.reload();
+			}
+		});
+	});
+
+
 
 	//logs user out
 	$('#logout').click(function (event) {
