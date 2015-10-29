@@ -22,7 +22,7 @@ progress {
 
 }
 .grey {
-	color: #D1D1DA;
+	color: #979797;
 }
 .form-group {
 	margin: 10px;
@@ -34,6 +34,8 @@ h1 {
 	font-weight: bold;
 	
 }
+.jumbotron h1 {
+	text-shadow: 3px 3px 2px white;}
 
 h2 {
 	color: #0099FF;
@@ -59,6 +61,10 @@ h4 {
 	opacity: 1;
 }
 
+header {
+	padding: 30px;
+}
+
 
 .jumbotron {
     position: right;
@@ -79,5 +85,18 @@ padding-top: 0px;
 .caption {
 	text-align: center;
 }
+
+<!-- Square card -->
+
+.demo-card-square.mdl-card {
+  width: 200px;
+  height: 200px;
+}
+.demo-card-square > .mdl-card__title {
+  color: #fff;
+  background:
+    url('../assets/demos/dog.png') bottom right 15% no-repeat #46B6AC;
+}
+
 
  

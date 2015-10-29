@@ -40,7 +40,7 @@ app.get('/', function (req, res) {
 			res.render("index", {items: items});
 		});
 	} else {
-				res.render('splash');
+		res.render('splash');
 		// res.render('index', {items: [{name: 'strawberries'}, {name: 'peaches'}, {name: 'bacon'}]}); //put fake items
 
 	}
@@ -65,26 +65,26 @@ app.get('/recipe', function (req, res) {
 					itemNames.push(itemName);	
 				}	else {console.log("timeLeft was more than 1209600000: ", timeLeft);}	
 			});
-				console.log("this is itemNames: " , itemNames);
-				request('http://food2fork.com/api/search?key='+FOOD_API_KEY+'&q=' + itemNames , function(error, response, body) {
-					if (!error && response.statusCode == 200){
-							var recipes = JSON.parse(body).recipes;
-							console.log("these are your recipes, the first search worked: ", recipes);
-								if (recipes.length > 1){
-									res.render('recipe', { recipes: recipes }); }
-								else {
-										var i = (Math.floor(Math.random() * items.length));
-										console.log("this is the name of the item being searched for : " , items[i].name);
-										request('http://food2fork.com/api/search?key='+FOOD_API_KEY+'&q=' +  items[i].name + '' , function(error, response, body) {
-											if (!error && response.statusCode == 200){
-											var recipes = JSON.parse(body).recipes;
-											console.log("these are your recipes, the random search worked: ", recipes);
-											res.render('recipe', { recipes: recipes });
-											}
-										});
+			console.log("this is itemNames: " , itemNames);
+			request('http://food2fork.com/api/search?key='+FOOD_API_KEY+'&q=' + itemNames , function(error, response, body) {
+				if (!error && response.statusCode == 200){
+					var recipes = JSON.parse(body).recipes;
+					console.log("these are your recipes, the first search worked: ", recipes);
+					if (recipes.length > 1){
+						res.render('recipe', { recipes: recipes }); }
+						else {
+							var i = (Math.floor(Math.random() * items.length));
+							console.log("this is the name of the item being searched for : " , items[i].name);
+							request('http://food2fork.com/api/search?key='+FOOD_API_KEY+'&q=' +  items[i].name + '' , function(error, response, body) {
+								if (!error && response.statusCode == 200){
+									var recipes = JSON.parse(body).recipes;
+									console.log("these are your recipes, the random search worked: ", recipes);
+									res.render('recipe', { recipes: recipes });
 								}
-				} else { res.send("request failed"); }
-			});
+							});
+						}
+					} else { res.send("request failed"); }
+				});
 		}
 	});
 });
@@ -114,10 +114,21 @@ app.post('/users', function (req, res){
 	var user = req.body;
 	db.User.createSecure(user.email, user.password, function (err, user){
 		if (err) {
-      res.send({err: err.errors});
-    } else {
-		req.session.user = user;
-		res.json({user: user, msg: "user created"});
+			res.send({err: err.errors});
+		} else {
+			req.session.user = user;
+			var firstFruits = [
+				{ user: req.session.user._id, name: 'kale', shelfLife: 1209600000},
+				{ user: req.session.user._id, name: 'apples', shelfLife: 1209600000}, 
+				{ user: req.session.user._id, name: 'carrots', shelfLife: 1209600000} 
+			];
+			db.Item.create(firstFruits, function (err, items){
+				if (err){
+					console.log("failed to create new item");
+				}
+				res.json({user: user, msg: "user created"});
+			});
+
 		}
 	});
 });

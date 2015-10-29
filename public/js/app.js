@@ -15,7 +15,8 @@ $(document).ready(function(){
   	
   	if ($('#item-input').val() !== ''){
 
-  	$.ajax({
+ function postItem () {
+ 		 	$.ajax({
 	  		url: '/items', 
 	  		type: 'POST', 
 	  		data: item
@@ -40,7 +41,7 @@ $(document).ready(function(){
 				.fail(function (data){
  					console.log("item was not added");
   		});
-		
+		};
 
 		} else {
 				console.log("your form is blank");
