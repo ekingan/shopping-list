@@ -23,14 +23,14 @@ https://gather-it.herokuapp.com/
 +Since I buy the same things on a weekly basis, I would like to have one list that contains the items I buy week to week. I don't want to have to recreate my shopping list all the time.
 
 ###Site Flow:
-A user signs up, and starts their shopping list. They add all the items they need to buy over the
-days or weeks, including the useful life of each item. When they go to the store, they check things 
-off their list as they purchase them, at which point, a progress bar shows them how much life their
-items have left. During the week, they can see which items are getting closer to expiration and 
-search for recipes that would include these items in the ingredients. When they are out of an item, 
-they can check it again to indicate that they need to buy it. Or, when the food expires, it reappears
-on their shopping list. The next time they go to the store, they will see what they need to buy since
-last week, and they can add new items as needed.
+>A user signs up, and starts their shopping list. They add all the items they need to buy over the
+>days or weeks, including the useful life of each item. When they go to the store, they check things 
+>off their list as they purchase them, at which point, a progress bar shows them how much life their
+>items have left. During the week, they can see which items are getting closer to expiration and 
+>search for recipes that would include these items in the ingredients. When they are out of an item, 
+>they can check it again to indicate that they need to buy it. Or, when the food expires, it reappears
+>on their shopping list. The next time they go to the store, they will see what they need to buy since
+>last week, and they can add new items as needed.
 
 ###API used  : Food2Fork
 
