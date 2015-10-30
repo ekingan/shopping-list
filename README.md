@@ -1,117 +1,43 @@
-## Getting set up on Heroku with Node + Mongoose
+Here is the link to my project on Heroku:
+https://gather-it.herokuapp.com/
 
-### Before you do anything
-1) Let's remove the link to the repo we cloned and commit the starting point of our project in a local git repo. We can check the location of the remote repository by typing: `git remote -v`. In order to remove the link to the class repo, type: `git remote remove origin`. You can confirm this was successful with the first command.
+Here is a link to my project on GitHub:
+https://github.com/ekingan/shopping-list
 
-If so, your app is still under version control with `git` but it only has a local repository. You can run `git status` to make sure. If not, just type `git init` to make it into one again. __Stop and commit your changes.__
+My web app, Gather-It, gives users a way to easily create grocery lists that help track your food
+so that it can be eaten while it is still fresh. Previously purchased foods reappear on the list 
+once they have expired, to make it even easier to remember what you need to purchase at the store.
+Based on the foods on your list, you can search for recipes, prioritizing foods that will expire 
+soonest. Gather-It is a great solution for those who frequently forget to buy things at the store,
+or who let food go to waste because they forgot to eat it!
 
-2) Sign up for an account with heroku: https://www.heroku.com/
+User Stories:
+My mind goes blank when I enter a busy grocery store. I can never remember what I need to buy. 
+A shopping list would be so helpful!
 
-3) Install the heroku toolbelt - [https://toolbelt.heroku.com/](https://toolbelt.heroku.com/)
+I forget when I buy certain things and then I buy them twice. I would like to avoid this.
 
-**(NOTE YOUR PROJECT MUST BE A GIT REPO TO CONTINUE.)**.
+Things go bad in my fridge. I would like some way of knowing that I should hurry up and eat that 
+thing already!
 
-### Heroku Setup
+Since I buy the same things on a weekly basis, I would like to have one list that contains the
+items I buy week to week. I don't want to have to recreate my shopping list all the time.
 
-4) Add a new remote to your project that points to Heroku's servers:
 
-```bash
-    heroku create
-```
+ Site Flow:
+A user signs up, and starts their shopping list. They add all the items they need to buy over the
+days or weeks, including the useful life of each item. When they go to the store, they check things 
+off their list as they purchase them, at which point, a progress bar shows them how much life their
+items have left. During the week, they can see which items are getting closer to expiration and 
+search for recipes that would include these items in the ingredients. When they are out of an item, 
+they can check it again to indicate that they need to buy it. Or, when the food expires, it reappears
+on their shopping list. The next time they go to the store, they will see what they need to buy since
+last week, and they can add new items as needed.
 
-5) In your `server.js` file, modify `app.listen` to use `process.env.PORT` (this will be set, dynamically, by Heroku):
+API used  : Food2Fork
 
-```javascript
-    app.listen(process.env.PORT || 5000)
-```
+Wishlist:
+It would be great to add the ability for one use to have many lists, or many users to colaborate 
+on one list. I would also like to include other APIs for recipes since my results from Food2Fork 
+were not always great.
 
-6) Tell heroku to use the mongolab addon. In your terminal, run:
-
-```bash
-    heroku addons:create mongolab
-```
-
-7) At this point, the command line may ask you to enter a credit card number. Heroku charges for some services, or if you go over some data limits. With the tools we're using and the size of our projects' data, everything should be free.  If you had to enter in a credit card, run the `heroku addons:create mongolab` command again. __You may need to wait a few minutes for mogolab to become active.__
-
-8) Update your database connection to point to Heroku's database. Open `models/index.js` and add the following to the `mongoose.connect` method:
-
-```javascript
-    mongoose.connect( process.env.MONGOLAB_URI ||
-                      process.env.MONGOHQ_URL || 
-                      "YOUR OWN LOCAL URL HERE" )
-```
-
-Congrats! Your application knows what port to run on, and what database to connect to - you're almost all set up to work in "production" on Heroku's servers!
-
-### Confirm your Dependencies
-
-9) Double check your `package.json` to make sure that all your depenedencies are present. If something is missing install it.
-
-Here are some common dependencies:  
-``` javascript
-    {
-      "dependencies": {
-        "body-parser": "^1.14.1",
-        "ejs": "^2.3.4",
-        "express": "^4.13.3",
-        "express-session": "^1.11.3",
-        "mongoose": "^4.1.5",
-        "nodemon": "^1.4.1"
-      }
-    }
-```
-
-For example, if you're using body-parser but don't have it listed in your package.json `dependencies`, run the following:
-
-```bash
-    npm install body-parser
-```
-
-### Check the start script
-10) Check a `start` script for your application in your `package.json`:
-
-```javascript
-...
-  "scripts": {
-    "start": "node server.js"
-   }
-...
-```
-
-This is assuming your main application file is called `server.js`. If your main file is called something else, adjust the script to use your file name.
-
-### Check the Procfile
-11) Notice we have a `Procfile` so that Heroku knows how to run your application. If you do not have a Procfile, create one:
-    - Make sure you are in your main project directory (the same directory as `server.js`). Then run:  
-``` bash
-    touch Procfile
-    echo "web: node server.js" >> Procfile
-```
-
-### Deploy!
-12) Stop and commit. We've made a lot of changes!
-``` bash
-    git add . -A
-    git commit -m "ready for heroku deploy attempt #1"
-```
-
-13) Now we can deploy:
-``` bash
-    git push heroku master
-```
-
-If you missed a step just ask for help. Otherwise you should be able to visit your application by saying the following:
-
-```bash
-    heroku open
-```
-
-## Debugging Tips
-
-Here are some helpful commands for debugging your application on Heroku:
-
-#### `heroku logs`
-This command lists your most recent application server logs. Helpful for figuring out why your application may be crashing and burning.
-
-#### `heroku run bash`
-This command allows you to run terminal _on Heroku's servers_. This is a handy way for us to poke around and run commands on our application (like seeding the database, and checking that everything was installed correctly).

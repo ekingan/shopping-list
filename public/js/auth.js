@@ -112,6 +112,7 @@ $('#guest').click(function (event) {
 			console.log(data.msg);
 			$('.not-logged-in').show();
 			window.location.reload();
+			location.href="/";
 
 			
 
