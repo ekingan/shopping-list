@@ -117,17 +117,17 @@ app.post('/users', function (req, res){
 			res.send({err: err.errors});
 		} else {
 			req.session.user = user;
-			// var firstFruits = [
-			// 	{ user: req.session.user._id, name: 'kale', shelfLife: 1209600000},
-			// 	{ user: req.session.user._id, name: 'apples', shelfLife: 1209600000}, 
-			// 	{ user: req.session.user._id, name: 'carrots', shelfLife: 1209600000} 
-			// ];
-			// db.Item.create(firstFruits, function (err, items){
-			// 	if (err){
-			// 		console.log("failed to create new item");
-			// 	}
+			var firstFruits = [
+				{ user: req.session.user._id, name: 'kale', shelfLife: 1209600000},
+				{ user: req.session.user._id, name: 'apples', shelfLife: 1209600000}, 
+				{ user: req.session.user._id, name: 'carrots', shelfLife: 1209600000} 
+			];
+			db.Item.create(firstFruits, function (err, items){
+				if (err){
+					console.log("failed to create new item");
+				}
 				res.json({user: user, msg: "user created"});
-			// });
+			});
 
 		}
 	});

@@ -21,6 +21,16 @@ progress {
   display: inline;
 
 }
+
+#jumboBtn {
+	margin: 10px;
+}
+
+div.well {
+	background-color: #FFD3A7;
+	color: white;
+}
+
 .grey {
 	color: #979797;
 }
@@ -60,12 +70,6 @@ h4 {
 .input-item {
 	opacity: 1;
 }
-
-header {
-	padding: 30px;
-}
-
-
 .jumbotron {
     position: right;
     background: #000 url("GroceryBag.jpg") top center;

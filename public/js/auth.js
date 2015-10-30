@@ -37,9 +37,6 @@ $('#guest').click(function (event) {
 	$('#signup-form').submit(function (event){
 			event.preventDefault();
 			var user = $(this).serialize();
-			var kale = 'name=kale&shelfLife=1209600000';
-			var apples = 'name=apples&shelfLife=1209600000';
-			var carrots = 'name=carrots&shelfLife=1209600000';
 
 			$.post('/users', user, function (data){
 				$('.not-logged-in').modal('hide');
@@ -49,6 +46,12 @@ $('#guest').click(function (event) {
 			});  
 
 	});
+
+		$('#signup-modal').on('shown.bs.modal', function () {
+    $('#signup-email').focus();
+		});
+
+
 	//log in form
 	$('#login-form').submit(function (event) {
 		event.preventDefault();
@@ -71,6 +74,10 @@ $('#guest').click(function (event) {
 			}
 		});
 	});
+
+		$('#login-modal').on('shown.bs.modal', function () {
+    $('#email').focus();
+		});
 
 	//for guest login 
 	$('#login-guest').click(function (event) {
@@ -110,5 +117,9 @@ $('#guest').click(function (event) {
 
 		});
 	});
+
+
+
+
 
 });

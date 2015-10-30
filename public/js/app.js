@@ -96,14 +96,17 @@ $(document).ready(function(){
 
 	});
 
-});
 
 $('#back').on('click', function (event) {
 	event.preventDefault();
 	location.href="/";
 
 });
-					
+			
+
+
+});
+		
 
 
 

@@ -45,13 +45,8 @@
         <h4 class="modal-title">Log In</h4>
       </div>
       <div class="modal-body" >
-              <!-- Warning for bad login -->
-        <!-- <div class="alert alert-warning alert-dismissible collapse" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <strong>Oh no!</strong> Something went wrong, please try again.
-        </div> -->
-        <!-- End of warning -->
-                <form id="login-form" > <!-- Log In Form -->
+          
+      <form id="login-form" > <!-- Log In Form -->
         <div class="form-group">
           <label for="email">Email address</label>
           <input name='email' type="email" class="form-control" id="email" placeholder="Email">
@@ -79,7 +74,7 @@
       <form id='signup-form'> <!-- Sign Up Form -->
         <div class="form-group">
           <label for="email">Email address</label>
-          <input name='email' type="email" class="form-control" id="email" placeholder="Email">
+          <input name='email' type="email" class="form-control" id="signup-email" placeholder="Email">
         </div>
         <div class="form-group">
           <label for="password1">Password</label>
@@ -102,13 +97,11 @@
   <nav class='navbar nav-right'>
     <div class="container-fluid">
       <div class="navbar-header">
-       
       </div>
         <ul class="nav navbar-nav navbar-left">
-        <li><a class="navbar-brand" href="#"><strong>gather-it.</strong></a></li>
+          <li><a class="navbar-brand" href="#"><strong>gather-it.</strong></a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <!-- <li><a href="#" id='guest' class='not-logged-in'>Guest</a></li> -->
           <li><a href='#' data-toggle='modal' data-target='#signup-modal' class='not-logged-in'>Sign Up</a></li>
           <li><a href='#' data-toggle='modal' data-target='#login-modal' class='not-logged-in'>Log In</a></li>
           <li><a href="#" id='logout'  class='logged-in'>Log Out</a></li>
@@ -119,25 +112,26 @@
   <div id="page-wrapper" class="container-fluid">
     <div class='row'>
       <div class='col-md-10 col-md-offset-1'>
-        <!-- <header class="page-header"> -->
+        <header class="page-header">
           <div class="jumbotron">
             <div class='container-fluid'>
               <header>
               <h1><strong class='pull-left'>a smart way to gather your groceries</strong></h1>
-               <p> <a class="btn btn-primary center" href="#" role="button" data-toggle='modal' data-target='#signup-modal'>Start your list</a></p>
               </header>
+               <p> <a class="btn btn-primary center" href="#" role="button" id='jumboBtn' data-toggle='modal' data-target='#signup-modal'>Start your list</a></p>
+              
             </div>
           </div>
        <!--  </header> -->
         <div class='row middle'>
           <div class='col-md-4'>
             <div class="well">
-            <h5>Easily create grocery lists that track your food so you can eat it while it is fresh. </h5>
+            <h5>Easily create grocery lists that track your food so you can eat it while it's fresh. </h5>
             </div>
           </div>
           <div class='col-md-4'>
             <div class="well">
-            <h5>Frequently purchased items automatically reappear on your list once they have expired.</h5>
+            <h5>Frequently purchased items reappear on your list once they have expired.</h5>
             </div>
           </div>
           <div class='col-md-4'>
