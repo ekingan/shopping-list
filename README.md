@@ -6,6 +6,8 @@ https://gather-it.herokuapp.com/
 ## Here is a link to my project on GitHub:
 [https://github.com/ekingan/shopping-list](https://github.com/ekingan/shopping-list)
 
+## Description
+
 >My web app, Gather-It, gives users a way to easily create grocery lists that help track your food
 >so that it can be eaten while it is still fresh. Previously purchased foods reappear on the list 
 >once they have expired, to make it even easier to remember what you need to purchase at the store.
@@ -34,11 +36,12 @@ https://gather-it.herokuapp.com/
 
 ## API used  : Food2Fork	
 
->Relationship model diagram
- ![relationship model diagram](/README/model.relationships.project1.jpg)
+## Entity relationships models
+![relationship model diagram](/README/model.relationships.project1.jpg)
 
- >Wireframe
- ![Wireframe](/README/wireframe-project1.jpg)
+## Wireframe picture
+
+![Wireframe](/README/wireframe-project1.jpg)
 
 
 
