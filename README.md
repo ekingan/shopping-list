@@ -36,6 +36,8 @@ last week, and they can add new items as needed.
 
 API used  : Food2Fork
 
+Wireframe and relationship model diagram included as images in the README directory.
+
 Wishlist:
 It would be great to add the ability for one use to have many lists, or many users to colaborate 
 on one list. I would also like to include other APIs for recipes since my results from Food2Fork 
