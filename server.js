@@ -196,11 +196,9 @@ app.delete('/items/:id', function (req, res){
 	console.log(req.params);
 	db.Item.remove({_id: req.params.id}, function (err, item){
 		console.log("item deleted");
-
 		res.json(item);
 	});
 });
-
 
 
 app.listen(process.env.PORT || 3000, function() {
