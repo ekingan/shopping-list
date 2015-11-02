@@ -102,9 +102,10 @@ app.post('/items', function (req, res){
 			console.log("failed to create new item");
 		}
 		console.log(item);
-		res.json(item);
-	});
 
+		db.Item.find({}, function(err,item){}).sort('expiresAt', -1);
+	});
+	res.json(item);
 });
 
 
