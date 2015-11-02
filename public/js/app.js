@@ -27,8 +27,7 @@ $(document).ready(function(){
 	  								"<div>" +
 	  								"<label class='checkbox-inline'>" + 
 	  								"<input type='checkbox' id='" + count + "' value='' name='checkbox' class='checkbox' data-id='" 
-	  								+ count + "'></label>"
-	  								+ item.name +  
+	  								+ count + "'></label>" + item.name +  
 	  								"<progress max='100' value='0' data-id='" + count + "'></progress>" +
 										"<div class='remove-item pull-right'>" +
 	  	 							"<button data-id='" + count + "' type='button' class='close'>" +
@@ -87,15 +86,29 @@ $(document).ready(function(){
 					$('progress[data-id = ' + id + ']').attr('value', '100');
 					$.now();
 					$.get('/items/' + id + '/purchase', function (data){
+						var something = $('#' + data._id);
 						$('#' + id).toggleClass('grey');
+						sortItems(something);
 						if (!data.purchasedAt) {
 							$('progress[data-id = ' + id + ']').attr('value', '0');
+							$("#list-items-ul").prepend(data);
+							console.log(data);
 						}
 					});
 				
 
 	});
 
+
+//Sort checked and un-checked grocery items
+var sortItems = function(checkedItem){
+	if ((checkedItem).hasClass('grey')){
+		$('#list-items-ul').append(checkedItem);
+	} else 
+		$('#list-items-ul').prepend(checkedItem);
+	};
+
+// sortItems();
 
 $('#back').on('click', function (event) {
 	event.preventDefault();
