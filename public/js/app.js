@@ -108,7 +108,7 @@ var sortItems = function(checkedItem){
 		$('#list-items-ul').prepend(checkedItem);
 	};
 
-sortItems();
+// sortItems();
 
 $('#back').on('click', function (event) {
 	event.preventDefault();
