@@ -114,9 +114,9 @@ $(document).ready(function(){
 //Sort checked and un-checked grocery items
 var sortItems = function(checkedItem){
 	if ((checkedItem).hasClass('grey')){
-		$('#list-items-ul').prepend(checkedItem);
-	} else {
 		$('#list-items-ul').append(checkedItem);
+	} else {
+		$('#list-items-ul').prepend(checkedItem);
 	}
 };
 
