@@ -83,18 +83,31 @@ $(document).ready(function(){
 		var id = $(this).attr('data-id');
 		console.log("this is : " , $(this));
 		console.log("this is the id of this: " , id);	
-		
+			
 					$('progress[data-id = ' + id + ']').attr('value', '100');
 					$.now();
 					$.get('/items/' + id + '/purchase', function (data){
+						var checkedItem = $('#' + data._id);
 						$('#' + id).toggleClass('grey');
+						sortItems(checkedItem);
+
 						if (!data.purchasedAt) {
 							$('progress[data-id = ' + id + ']').attr('value', '0');
+							$('#list-items-ul').prepend(data);
 						}
 					});
 				
 
 	});
+
+	var sortItems = function (checkedItem) {
+		if (checkedItem.hasClass('grey')) {
+			$('#list-items-ul').append(checkedItem);
+		} else {
+			$('#list-items-ul').prepend(checkedItem);
+		}
+
+	};
 
 
 $('#back').on('click', function (event) {

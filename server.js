@@ -24,7 +24,7 @@ app.use(session({
 	saveUninitialized: true,
 	resave: true, 
 	secret: 'SuperSecretCookie',
-	cookie: {maxAge: 600000}
+	cookie: {maxAge: 6092000000}
 }));
 
 
@@ -32,7 +32,7 @@ app.use(session({
 //for index
 app.get('/', function (req, res) {
 	if(req.session.user ) {
-		db.Item.find({user: req.session.user._id}, function (err, items){ // user: req.session.user._id
+		db.Item.find({user: req.session.user._id}).sort('-expiresAt').exec(function (err, items){ // user: req.session.user._id
 			if (err){
 				console.log("error getting items from db");
 			}
@@ -101,7 +101,8 @@ app.post('/items', function (req, res){
 		if (err){
 			console.log("failed to create new item");
 		}
-		console.log(item);
+		// db.Item.find({}, null, {sort: {expiresAt: 'desc'}}, function (err, item){
+			console.log(item);
 		res.json(item);
 	});
 
