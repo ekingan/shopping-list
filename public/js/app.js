@@ -6,23 +6,27 @@ $(document).ready(function(){
 
 
 //Event handler for entering new item 
+// When a new item is entered
   $('#new-item-form').on('submit', function (event){
   	event.preventDefault();
 // var item = $('#item-input').val();
+		//Create new serialized item
 		var item = $('#new-item-form').serialize();
 		console.log("this is the serialized item: " + item);
 
-  	
+  	// Keeps from submitting blank forms
   	if ($('#item-input').val() !== ''){
-
+  		//post item
  		 	$.ajax({
 	  		url: '/items', 
 	  		type: 'POST', 
 	  		data: item
 	  	})
+	  	// if successful
 	  		.done(function (item){
+	  			// set count equal to item id
 	  			count = item._id;
-			  	
+			  	//this is what appears on page
 	  			var itemHtml = "<li class='list-group' id='" + count + "'>" + 
 	  								"<div>" +
 	  								"<label class='checkbox-inline'>" + 
@@ -32,10 +36,12 @@ $(document).ready(function(){
 										"<div class='remove-item pull-right'>" +
 	  	 							"<button data-id='" + count + "' type='button' class='close'>" +
 	  	 							"<i class='icon ion-ios-trash-outline'></i></button></div></div></li>"; 
-	  	 							
+	  	 		// post to page at top of page					
 					$('#list-items-ul').prepend(itemHtml);
+					//reset form
 					$('#new-item-form')[0].reset();
 			})
+	  		//this is what happens when it fails to post
 				.fail(function (data){
  					console.log("item was not added");
   		});
@@ -58,10 +64,10 @@ $(document).ready(function(){
 	//delete items from list
 	$('#list-items-ul').on('click', '.close', function (event){
 		event.preventDefault();
-
+		//finds item to delete by id
 		var id = $(this).attr('data-id');
 		console.log(id);
-
+//delete request
 			$.ajax({
 			url: '/items/' + id,
 			type: 'DELETE',
@@ -95,15 +101,15 @@ $(document).ready(function(){
 							$('progress[data-id = ' + id + ']').attr('value', '0');
 							$('#list-items-ul').prepend(data);
 
-							var something = $('#' + data._id);
-							$('#' + id).toggleClass('grey');
-							sortItems(something);
-							if (!data.purchasedAt) {
-								$('progress[data-id = ' + id + ']').attr('value', '0');
-								$("#list-items-ul").prepend(data);
-								console.log(data);
+							// var something = $('#' + data._id);
+							// $('#' + id).toggleClass('grey');
+							// sortItems(something);
+							// if (!data.purchasedAt) {
+							// 	$('progress[data-id = ' + id + ']').attr('value', '0');
+							// 	$("#list-items-ul").prepend(data);
+							// 	console.log(data);
 
-							}
+							// }
 						}
 				});
 				
